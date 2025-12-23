@@ -61,6 +61,7 @@ Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard')->mi
     [
 
         'XSS',
+        'member.details'
     ]
 );
 
@@ -70,6 +71,7 @@ Route::resource('users', UserController::class)->middleware(
     [
         'auth',
         'XSS',
+        'member.details',
     ]
 );
 
@@ -101,6 +103,7 @@ Route::group(
         'middleware' => [
             'auth',
             'XSS',
+            'member.details',
         ],
     ],
     function () {
@@ -121,6 +124,7 @@ Route::group(
         'middleware' => [
             'auth',
             'XSS',
+            'member.details',
         ],
     ],
     function () {
@@ -134,6 +138,7 @@ Route::group(
         'middleware' => [
             'auth',
             'XSS',
+            'member.details',
         ],
     ],
     function () {
@@ -168,6 +173,7 @@ Route::resource('permission', PermissionController::class)->middleware(
     [
         'auth',
         'XSS',
+        'member.details',
     ]
 );
 
@@ -175,6 +181,7 @@ Route::resource('role', RoleController::class)->middleware(
     [
         'auth',
         'XSS',
+        'member.details',
     ]
 );
 
@@ -183,6 +190,7 @@ Route::resource('note', NoticeBoardController::class)->middleware(
     [
         'auth',
         'XSS',
+        'member.details',
     ]
 );
 
@@ -191,6 +199,7 @@ Route::resource('contact', ContactController::class)->middleware(
     [
         'auth',
         'XSS',
+        'member.details',
     ]
 );
 
@@ -201,6 +210,7 @@ Route::group(
         'middleware' => [
             'auth',
             'XSS',
+            'member.details',
         ],
     ],
     function () {
@@ -218,6 +228,7 @@ Route::group(
         'middleware' => [
             'auth',
             'XSS',
+            'member.details',
         ],
     ],
     function () {
@@ -239,6 +250,7 @@ Route::resource('document-type', DocumentTypeController::class)->middleware(
     [
         'auth',
         'XSS',
+        'member.details',
     ]
 );
 
@@ -247,6 +259,7 @@ Route::resource('expense-type', ExpenseTypeController::class)->middleware(
     [
         'auth',
         'XSS',
+        'member.details',
     ]
 );
 
@@ -268,6 +281,7 @@ Route::resource('member', MemberController::class)->middleware(
     [
         'auth',
         'XSS',
+        'member.details',
     ]
 );
 Route::group(
@@ -275,6 +289,7 @@ Route::group(
         'middleware' => [
             'auth',
             'XSS',
+            'member.details',
         ],
     ],
     function () {
@@ -293,6 +308,7 @@ Route::group(
         'middleware' => [
             'auth',
             'XSS',
+            'member.details',
         ],
     ],
     function () {
@@ -306,6 +322,7 @@ Route::resource('membership-plan', MembershipPlanController::class)->middleware(
     [
         'auth',
         'XSS',
+        'member.details',
     ]
 );
 
@@ -318,6 +335,7 @@ Route::group(
         'middleware' => [
             'auth',
             'XSS',
+            'member.details',
         ],
     ],
     function () {
@@ -332,6 +350,7 @@ Route::group(
         'middleware' => [
             'auth',
             'XSS',
+            'member.details',
         ],
     ],
     function () {
@@ -345,6 +364,7 @@ Route::resource('activity-tracking', ActivityTrackingController::class)->middlew
     [
         'auth',
         'XSS',
+        'member.details',
     ]
 );
 
@@ -353,6 +373,7 @@ Route::resource('membership-suspension', MembershipSuspensionController::class)-
     [
         'auth',
         'XSS',
+        'member.details',
     ]
 );
 
@@ -363,6 +384,7 @@ Route::resource('expense', ExpenseController::class)->middleware(
     [
         'auth',
         'XSS',
+        'member.details',
     ]
 );
 
@@ -371,6 +393,7 @@ Route::resource('notification', NotificationController::class)->middleware(
     [
         'auth',
         'XSS',
+        'member.details',
 
     ]
 );
@@ -461,6 +484,20 @@ Route::group(
     }
 );
 
+
+//-------------------------------Member Details-------------------------------------------
+Route::group(
+    [
+        'middleware' => [
+            'auth',
+            'XSS',
+        ],
+    ],
+    function () {
+        Route::get('details', [App\Http\Controllers\MemberDetailController::class, 'showForm'])->name('member-details.form');
+        Route::post('details', [App\Http\Controllers\MemberDetailController::class, 'store'])->name('member-details.store');
+    }
+);
 
 //-------------------------------FAQ-------------------------------------------
 Route::impersonate();

@@ -24,12 +24,22 @@ class Member extends Model
         'emergency_contact_information',
         'address',
         'note',
-        'parent_id'
+        'parent_id',
+        'form_submitted',
+    ];
+
+    protected $casts = [
+        'form_submitted' => 'boolean',
     ];
 
       public function membershipLates()
     {
         return $this->hasOne(Membership::class, 'member_id', 'id')->latestOfMany();
+    }
+
+    public function details()
+    {
+        return $this->hasOne(MemberDetail::class);
     }
 
 

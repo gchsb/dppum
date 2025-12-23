@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('tab-title'); ?>
     <?php echo e(__('Member Registration')); ?>
 
