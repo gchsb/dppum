@@ -7,7 +7,10 @@ node_modules/
 npm-debug.log
 yarn-error.log
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6f822f996163a6d7771039c52581d87284fb0750
 *.zip
 
 # Laravel 4 specific

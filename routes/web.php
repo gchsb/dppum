@@ -45,10 +45,10 @@ use Illuminate\Support\Facades\Auth;
 
 require __DIR__ . '/auth.php';
 
+
 Route::get('/migrate',function(){
     Artisan::call('migrate');
 });
-
 Route::get('/', [HomeController::class, 'index'])->middleware(
     [
 
