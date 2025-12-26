@@ -53,6 +53,7 @@ Route::get('/', [HomeController::class, 'index'])->middleware(
     [
 
         'XSS',
+        'member.details',
     ]
 );
 Route::get('home', [HomeController::class, 'index'])->name('home')->middleware(
