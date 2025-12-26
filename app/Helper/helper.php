@@ -291,6 +291,9 @@ if (!function_exists('priceFormat')) {
 if (!function_exists('parentId')) {
     function parentId()
     {
+        if (!\auth()->check()) {
+            return null;
+        }
         if (\Auth::user()->type == 'owner' || \Auth::user()->type == 'super admin') {
             return \Auth::user()->id;
         } else {
