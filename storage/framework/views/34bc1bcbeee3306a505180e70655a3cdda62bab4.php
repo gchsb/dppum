@@ -111,7 +111,7 @@ unset($__errorArgs, $__bag); ?>
             <?php if($registerPage == 'on'): ?>
                 <hr />
                 <h5 class="d-flex justify-content-center"><?php echo e(__("Don't Have An Account?")); ?> <a class="ms-1 text-secondary"
-                        href="<?php echo e(route('register')); ?>"><?php echo e(__('Create an account')); ?></a>
+                        href="<?php echo e(route('member.register')); ?>"><?php echo e(__('Create an account')); ?></a>
                 </h5>
             <?php endif; ?>
             <?php echo e(Form::close()); ?>

@@ -188,7 +188,7 @@ class MemberController extends Controller
     public function show($id)
     {
         if (\Auth::user()->can('show member')) {
-            $member = Member::where('parent_id', parentId())->where('id', Crypt::decrypt($id))->first();
+            $member = Member::with('details')->where('parent_id', parentId())->where('id', Crypt::decrypt($id))->first();
             $memberships = Membership::where('parent_id', parentId())
                 ->where('member_id', $member->id)
                 ->orderBy('id', 'DESC')

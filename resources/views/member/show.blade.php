@@ -139,6 +139,234 @@
                 </div>
             </div>
         </div>
+        @if (!empty($member->details))
+            <div class="col-sm-12">
+                <div class="card border">
+                    <div class="card-header">
+                        <h5>{{ __('Member Additional Details') }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <tbody>
+                                    @if (!empty($member->details->full_name))
+                                        <tr>
+                                            <td><b class="text-header">{{ __('Full Name') }}</b></td>
+                                            <td>:</td>
+                                            <td>{{ $member->details->full_name }}</td>
+                                        </tr>
+                                    @endif
+                                    @if (!empty($member->details->phone_whatsapp))
+                                        <tr>
+                                            <td><b class="text-header">{{ __('Phone/WhatsApp') }}</b></td>
+                                            <td>:</td>
+                                            <td>{{ $member->details->phone_whatsapp }}</td>
+                                        </tr>
+                                    @endif
+                                    @if (!empty($member->details->business_company_name))
+                                        <tr>
+                                            <td><b class="text-header">{{ __('Business/Company Name') }}</b></td>
+                                            <td>:</td>
+                                            <td>{{ $member->details->business_company_name }}</td>
+                                        </tr>
+                                    @endif
+                                    @if (!empty($member->details->role_in_company))
+                                        <tr>
+                                            <td><b class="text-header">{{ __('Role in Company') }}</b></td>
+                                            <td>:</td>
+                                            <td>
+                                                @if (is_array($member->details->role_in_company))
+                                                    {{ implode(', ', $member->details->role_in_company) }}
+                                                @else
+                                                    {{ $member->details->role_in_company }}
+                                                @endif
+                                                @if (!empty($member->details->role_other))
+                                                    - {{ $member->details->role_other }}
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endif
+                                    @if (!empty($member->details->represent_ngo))
+                                        <tr>
+                                            <td><b class="text-header">{{ __('Represent NGO') }}</b></td>
+                                            <td>:</td>
+                                            <td>{{ $member->details->represent_ngo }}</td>
+                                        </tr>
+                                    @endif
+                                    @if (!empty($member->details->ngo_position))
+                                        <tr>
+                                            <td><b class="text-header">{{ __('NGO Position') }}</b></td>
+                                            <td>:</td>
+                                            <td>{{ $member->details->ngo_position }}</td>
+                                        </tr>
+                                    @endif
+                                    @if (!empty($member->details->ngo_name))
+                                        <tr>
+                                            <td><b class="text-header">{{ __('NGO Name') }}</b></td>
+                                            <td>:</td>
+                                            <td>{{ $member->details->ngo_name }}</td>
+                                        </tr>
+                                    @endif
+                                    @if (!empty($member->details->ngo_business_count))
+                                        <tr>
+                                            <td><b class="text-header">{{ __('NGO/Business Count') }}</b></td>
+                                            <td>:</td>
+                                            <td>{{ $member->details->ngo_business_count }}</td>
+                                        </tr>
+                                    @endif
+                                    @if (!empty($member->details->ssm_status))
+                                        <tr>
+                                            <td><b class="text-header">{{ __('SSM Status') }}</b></td>
+                                            <td>:</td>
+                                            <td>{{ $member->details->ssm_status }}</td>
+                                        </tr>
+                                    @endif
+                                    @if (!empty($member->details->ssm_registration_number))
+                                        <tr>
+                                            <td><b class="text-header">{{ __('SSM Registration Number') }}</b></td>
+                                            <td>:</td>
+                                            <td>{{ $member->details->ssm_registration_number }}</td>
+                                        </tr>
+                                    @endif
+                                    @if (!empty($member->details->has_bank_account))
+                                        <tr>
+                                            <td><b class="text-header">{{ __('Has Bank Account') }}</b></td>
+                                            <td>:</td>
+                                            <td>{{ $member->details->has_bank_account }}</td>
+                                        </tr>
+                                    @endif
+                                    @if (!empty($member->details->office_address))
+                                        <tr>
+                                            <td><b class="text-header">{{ __('Office Address') }}</b></td>
+                                            <td>:</td>
+                                            <td>{{ $member->details->office_address }}</td>
+                                        </tr>
+                                    @endif
+                                    @if (!empty($member->details->office_state))
+                                        <tr>
+                                            <td><b class="text-header">{{ __('Office State') }}</b></td>
+                                            <td>:</td>
+                                            <td>{{ $member->details->office_state }}</td>
+                                        </tr>
+                                    @endif
+                                    @if (!empty($member->details->office_district))
+                                        <tr>
+                                            <td><b class="text-header">{{ __('Office District') }}</b></td>
+                                            <td>:</td>
+                                            <td>{{ $member->details->office_district }}</td>
+                                        </tr>
+                                    @endif
+                                    @if (!empty($member->details->business_problems))
+                                        <tr>
+                                            <td><b class="text-header">{{ __('Business Problems') }}</b></td>
+                                            <td>:</td>
+                                            <td>
+                                                @if (is_array($member->details->business_problems))
+                                                    {{ implode(', ', $member->details->business_problems) }}
+                                                @else
+                                                    {{ $member->details->business_problems }}
+                                                @endif
+                                                @if (!empty($member->details->business_problems_other))
+                                                    - {{ $member->details->business_problems_other }}
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endif
+                                    @if (!empty($member->details->support_required))
+                                        <tr>
+                                            <td><b class="text-header">{{ __('Support Required') }}</b></td>
+                                            <td>:</td>
+                                            <td>
+                                                @if (is_array($member->details->support_required))
+                                                    {{ implode(', ', $member->details->support_required) }}
+                                                @else
+                                                    {{ $member->details->support_required }}
+                                                @endif
+                                                @if (!empty($member->details->support_required_other))
+                                                    - {{ $member->details->support_required_other }}
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endif
+                                    @if (!empty($member->details->suggestions_feedback))
+                                        <tr>
+                                            <td><b class="text-header">{{ __('Suggestions/Feedback') }}</b></td>
+                                            <td>:</td>
+                                            <td>{{ $member->details->suggestions_feedback }}</td>
+                                        </tr>
+                                    @endif
+                                    @if (!empty($member->details->social_media_accounts))
+                                        <tr>
+                                            <td><b class="text-header">{{ __('Social Media Accounts') }}</b></td>
+                                            <td>:</td>
+                                            <td>
+                                                @if (is_array($member->details->social_media_accounts))
+                                                    {{ implode(', ', $member->details->social_media_accounts) }}
+                                                @else
+                                                    {{ $member->details->social_media_accounts }}
+                                                @endif
+                                                @if (!empty($member->details->social_media_other))
+                                                    - {{ $member->details->social_media_other }}
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endif
+                                    @if (!empty($member->details->social_media_link))
+                                        <tr>
+                                            <td><b class="text-header">{{ __('Social Media Link') }}</b></td>
+                                            <td>:</td>
+                                            <td>
+                                                <a href="{{ $member->details->social_media_link }}" target="_blank">{{ $member->details->social_media_link }}</a>
+                                            </td>
+                                        </tr>
+                                    @endif
+                                    @if (!empty($member->details->delivery_app_interest))
+                                        <tr>
+                                            <td><b class="text-header">{{ __('Delivery App Interest') }}</b></td>
+                                            <td>:</td>
+                                            <td>{{ $member->details->delivery_app_interest }}</td>
+                                        </tr>
+                                    @endif
+                                    @if (!empty($member->details->learned_from))
+                                        <tr>
+                                            <td><b class="text-header">{{ __('Learned From') }}</b></td>
+                                            <td>:</td>
+                                            <td>
+                                                @if (is_array($member->details->learned_from))
+                                                    {{ implode(', ', $member->details->learned_from) }}
+                                                @else
+                                                    {{ $member->details->learned_from }}
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endif
+                                    @if (!empty($member->details->invited_by))
+                                        <tr>
+                                            <td><b class="text-header">{{ __('Invited By') }}</b></td>
+                                            <td>:</td>
+                                            <td>{{ $member->details->invited_by }}</td>
+                                        </tr>
+                                    @endif
+                                    @if (isset($member->details->declaration_consent))
+                                        <tr>
+                                            <td><b class="text-header">{{ __('Declaration Consent') }}</b></td>
+                                            <td>:</td>
+                                            <td>
+                                                @if ($member->details->declaration_consent)
+                                                    <span class="badge text-bg-success">{{ __('Yes') }}</span>
+                                                @else
+                                                    <span class="badge text-bg-danger">{{ __('No') }}</span>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
         <div class="col-sm-12">
             <div class="card table-card">
                 <div class="card-header">

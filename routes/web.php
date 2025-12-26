@@ -60,6 +60,8 @@ Route::get('home', [HomeController::class, 'index'])->name('home')->middleware(
     [
 
         'XSS',
+        'member.details'
+
     ]
 );
 Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard')->middleware(

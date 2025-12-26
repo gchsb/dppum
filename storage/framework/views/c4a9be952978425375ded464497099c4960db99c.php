@@ -148,6 +148,248 @@
                 </div>
             </div>
         </div>
+        <?php if(!empty($member->details)): ?>
+            <div class="col-sm-12">
+                <div class="card border">
+                    <div class="card-header">
+                        <h5><?php echo e(__('Member Additional Details')); ?></h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <tbody>
+                                    <?php if(!empty($member->details->full_name)): ?>
+                                        <tr>
+                                            <td><b class="text-header"><?php echo e(__('Full Name')); ?></b></td>
+                                            <td>:</td>
+                                            <td><?php echo e($member->details->full_name); ?></td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <?php if(!empty($member->details->phone_whatsapp)): ?>
+                                        <tr>
+                                            <td><b class="text-header"><?php echo e(__('Phone/WhatsApp')); ?></b></td>
+                                            <td>:</td>
+                                            <td><?php echo e($member->details->phone_whatsapp); ?></td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <?php if(!empty($member->details->business_company_name)): ?>
+                                        <tr>
+                                            <td><b class="text-header"><?php echo e(__('Business/Company Name')); ?></b></td>
+                                            <td>:</td>
+                                            <td><?php echo e($member->details->business_company_name); ?></td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <?php if(!empty($member->details->role_in_company)): ?>
+                                        <tr>
+                                            <td><b class="text-header"><?php echo e(__('Role in Company')); ?></b></td>
+                                            <td>:</td>
+                                            <td>
+                                                <?php if(is_array($member->details->role_in_company)): ?>
+                                                    <?php echo e(implode(', ', $member->details->role_in_company)); ?>
+
+                                                <?php else: ?>
+                                                    <?php echo e($member->details->role_in_company); ?>
+
+                                                <?php endif; ?>
+                                                <?php if(!empty($member->details->role_other)): ?>
+                                                    - <?php echo e($member->details->role_other); ?>
+
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <?php if(!empty($member->details->represent_ngo)): ?>
+                                        <tr>
+                                            <td><b class="text-header"><?php echo e(__('Represent NGO')); ?></b></td>
+                                            <td>:</td>
+                                            <td><?php echo e($member->details->represent_ngo); ?></td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <?php if(!empty($member->details->ngo_position)): ?>
+                                        <tr>
+                                            <td><b class="text-header"><?php echo e(__('NGO Position')); ?></b></td>
+                                            <td>:</td>
+                                            <td><?php echo e($member->details->ngo_position); ?></td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <?php if(!empty($member->details->ngo_name)): ?>
+                                        <tr>
+                                            <td><b class="text-header"><?php echo e(__('NGO Name')); ?></b></td>
+                                            <td>:</td>
+                                            <td><?php echo e($member->details->ngo_name); ?></td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <?php if(!empty($member->details->ngo_business_count)): ?>
+                                        <tr>
+                                            <td><b class="text-header"><?php echo e(__('NGO/Business Count')); ?></b></td>
+                                            <td>:</td>
+                                            <td><?php echo e($member->details->ngo_business_count); ?></td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <?php if(!empty($member->details->ssm_status)): ?>
+                                        <tr>
+                                            <td><b class="text-header"><?php echo e(__('SSM Status')); ?></b></td>
+                                            <td>:</td>
+                                            <td><?php echo e($member->details->ssm_status); ?></td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <?php if(!empty($member->details->ssm_registration_number)): ?>
+                                        <tr>
+                                            <td><b class="text-header"><?php echo e(__('SSM Registration Number')); ?></b></td>
+                                            <td>:</td>
+                                            <td><?php echo e($member->details->ssm_registration_number); ?></td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <?php if(!empty($member->details->has_bank_account)): ?>
+                                        <tr>
+                                            <td><b class="text-header"><?php echo e(__('Has Bank Account')); ?></b></td>
+                                            <td>:</td>
+                                            <td><?php echo e($member->details->has_bank_account); ?></td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <?php if(!empty($member->details->office_address)): ?>
+                                        <tr>
+                                            <td><b class="text-header"><?php echo e(__('Office Address')); ?></b></td>
+                                            <td>:</td>
+                                            <td><?php echo e($member->details->office_address); ?></td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <?php if(!empty($member->details->office_state)): ?>
+                                        <tr>
+                                            <td><b class="text-header"><?php echo e(__('Office State')); ?></b></td>
+                                            <td>:</td>
+                                            <td><?php echo e($member->details->office_state); ?></td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <?php if(!empty($member->details->office_district)): ?>
+                                        <tr>
+                                            <td><b class="text-header"><?php echo e(__('Office District')); ?></b></td>
+                                            <td>:</td>
+                                            <td><?php echo e($member->details->office_district); ?></td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <?php if(!empty($member->details->business_problems)): ?>
+                                        <tr>
+                                            <td><b class="text-header"><?php echo e(__('Business Problems')); ?></b></td>
+                                            <td>:</td>
+                                            <td>
+                                                <?php if(is_array($member->details->business_problems)): ?>
+                                                    <?php echo e(implode(', ', $member->details->business_problems)); ?>
+
+                                                <?php else: ?>
+                                                    <?php echo e($member->details->business_problems); ?>
+
+                                                <?php endif; ?>
+                                                <?php if(!empty($member->details->business_problems_other)): ?>
+                                                    - <?php echo e($member->details->business_problems_other); ?>
+
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <?php if(!empty($member->details->support_required)): ?>
+                                        <tr>
+                                            <td><b class="text-header"><?php echo e(__('Support Required')); ?></b></td>
+                                            <td>:</td>
+                                            <td>
+                                                <?php if(is_array($member->details->support_required)): ?>
+                                                    <?php echo e(implode(', ', $member->details->support_required)); ?>
+
+                                                <?php else: ?>
+                                                    <?php echo e($member->details->support_required); ?>
+
+                                                <?php endif; ?>
+                                                <?php if(!empty($member->details->support_required_other)): ?>
+                                                    - <?php echo e($member->details->support_required_other); ?>
+
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <?php if(!empty($member->details->suggestions_feedback)): ?>
+                                        <tr>
+                                            <td><b class="text-header"><?php echo e(__('Suggestions/Feedback')); ?></b></td>
+                                            <td>:</td>
+                                            <td><?php echo e($member->details->suggestions_feedback); ?></td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <?php if(!empty($member->details->social_media_accounts)): ?>
+                                        <tr>
+                                            <td><b class="text-header"><?php echo e(__('Social Media Accounts')); ?></b></td>
+                                            <td>:</td>
+                                            <td>
+                                                <?php if(is_array($member->details->social_media_accounts)): ?>
+                                                    <?php echo e(implode(', ', $member->details->social_media_accounts)); ?>
+
+                                                <?php else: ?>
+                                                    <?php echo e($member->details->social_media_accounts); ?>
+
+                                                <?php endif; ?>
+                                                <?php if(!empty($member->details->social_media_other)): ?>
+                                                    - <?php echo e($member->details->social_media_other); ?>
+
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <?php if(!empty($member->details->social_media_link)): ?>
+                                        <tr>
+                                            <td><b class="text-header"><?php echo e(__('Social Media Link')); ?></b></td>
+                                            <td>:</td>
+                                            <td>
+                                                <a href="<?php echo e($member->details->social_media_link); ?>" target="_blank"><?php echo e($member->details->social_media_link); ?></a>
+                                            </td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <?php if(!empty($member->details->delivery_app_interest)): ?>
+                                        <tr>
+                                            <td><b class="text-header"><?php echo e(__('Delivery App Interest')); ?></b></td>
+                                            <td>:</td>
+                                            <td><?php echo e($member->details->delivery_app_interest); ?></td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <?php if(!empty($member->details->learned_from)): ?>
+                                        <tr>
+                                            <td><b class="text-header"><?php echo e(__('Learned From')); ?></b></td>
+                                            <td>:</td>
+                                            <td>
+                                                <?php if(is_array($member->details->learned_from)): ?>
+                                                    <?php echo e(implode(', ', $member->details->learned_from)); ?>
+
+                                                <?php else: ?>
+                                                    <?php echo e($member->details->learned_from); ?>
+
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <?php if(!empty($member->details->invited_by)): ?>
+                                        <tr>
+                                            <td><b class="text-header"><?php echo e(__('Invited By')); ?></b></td>
+                                            <td>:</td>
+                                            <td><?php echo e($member->details->invited_by); ?></td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <?php if(isset($member->details->declaration_consent)): ?>
+                                        <tr>
+                                            <td><b class="text-header"><?php echo e(__('Declaration Consent')); ?></b></td>
+                                            <td>:</td>
+                                            <td>
+                                                <?php if($member->details->declaration_consent): ?>
+                                                    <span class="badge text-bg-success"><?php echo e(__('Yes')); ?></span>
+                                                <?php else: ?>
+                                                    <span class="badge text-bg-danger"><?php echo e(__('No')); ?></span>
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                    <?php endif; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
         <div class="col-sm-12">
             <div class="card table-card">
                 <div class="card-header">
