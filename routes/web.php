@@ -503,6 +503,26 @@ Route::group(
     function () {
         Route::get('details', [App\Http\Controllers\MemberDetailController::class, 'showForm'])->name('member-details.form');
         Route::post('details', [App\Http\Controllers\MemberDetailController::class, 'store'])->name('member-details.store');
+        Route::get('details/edit', [App\Http\Controllers\MemberDetailController::class, 'edit'])->name('member-details.edit');
+        Route::post('details/update', [App\Http\Controllers\MemberDetailController::class, 'update'])->name('member-details.update');
+    }
+);
+
+//-------------------------------Member Products-------------------------------------------
+Route::group(
+    [
+        'middleware' => [
+            'auth',
+            'XSS',
+        ],
+    ],
+    function () {
+        Route::get('member-products', [App\Http\Controllers\MemberProductController::class, 'index'])->name('member-products.index');
+        Route::get('member-products/create', [App\Http\Controllers\MemberProductController::class, 'create'])->name('member-products.create');
+        Route::post('member-products', [App\Http\Controllers\MemberProductController::class, 'store'])->name('member-products.store');
+        Route::get('member-products/{id}/edit', [App\Http\Controllers\MemberProductController::class, 'edit'])->name('member-products.edit');
+        Route::put('member-products/{id}', [App\Http\Controllers\MemberProductController::class, 'update'])->name('member-products.update');
+        Route::delete('member-products/{id}', [App\Http\Controllers\MemberProductController::class, 'destroy'])->name('member-products.destroy');
     }
 );
 

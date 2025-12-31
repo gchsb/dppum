@@ -33,10 +33,21 @@ class EnsureMemberDetailsSubmitted
             return $next($request);
         }
 
+        // Avoid redirect loop on products pages
+        if ($request->is('member-products') || $request->is('member-products/*')) {
+            return $next($request);
+        }
+
         $member = $user->members;
 
         if (! $member || ! $member->form_submitted) {
             return redirect()->route('member-details.form');
+        }
+
+        // Check if member has at least one product
+        if ($member->products()->count() === 0) {
+            return redirect()->route('member-products.index')
+                ->with('warning', 'Please add at least one product to complete your registration.');
         }
 
         return $next($request);

@@ -1,14 +1,14 @@
 
 
 <?php $__env->startSection('page-title'); ?>
-    <?php echo e(__('Complete Your Member Details')); ?>
+    <?php echo e(__('Edit Your Member Details')); ?>
 
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('breadcrumb'); ?>
     <ul class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?php echo e(route('dashboard')); ?>"><?php echo e(__('Dashboard')); ?></a></li>
-        <li class="breadcrumb-item active" aria-current="page"><?php echo e(__('Member Details')); ?></li>
+        <li class="breadcrumb-item active" aria-current="page"><?php echo e(__('Edit Member Details')); ?></li>
     </ul>
 <?php $__env->stopSection(); ?>
 
@@ -127,6 +127,10 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
+                    <div class="alert alert-info mb-4">
+                        <i class="ti ti-info-circle"></i> You are editing your member details. All fields marked with <span class="text-danger">*</span> are required.
+                    </div>
+
                     <!-- Step Indicator -->
                     <div class="step-indicator">
                         <div class="step active" data-step="1">
@@ -556,7 +560,7 @@
                                 Next <i class="ti ti-arrow-right"></i>
                             </button>
                             <button type="submit" class="btn btn-success" id="submitBtn" style="display: none;">
-                                <i class="ti ti-check"></i> Submit Form
+                                <i class="ti ti-check"></i> Update Details
                             </button>
                         </div>
                     </form>
@@ -653,10 +657,10 @@
 
                 const formData = new FormData(this);
                 
-                $('#submitBtn').prop('disabled', true).html('<i class="ti ti-loader ti-spin"></i> Submitting...');
+                $('#submitBtn').prop('disabled', true).html('<i class="ti ti-loader ti-spin"></i> Updating...');
 
                 $.ajax({
-                    url: '<?php echo e(route("member-details.store")); ?>',
+                    url: '<?php echo e(route("member-details.update")); ?>',
                     method: 'POST',
                     data: formData,
                     processData: false,
@@ -670,12 +674,12 @@
                         }
                     },
                     error: function(xhr) {
-                        $('#submitBtn').prop('disabled', false).html('<i class="ti ti-check"></i> Submit Form');
+                        $('#submitBtn').prop('disabled', false).html('<i class="ti ti-check"></i> Update Details');
                         
                         if (xhr.responseJSON && xhr.responseJSON.message) {
                             show_toastr('Error', xhr.responseJSON.message, 'error');
                         } else {
-                            show_toastr('Error', 'An error occurred while submitting the form.', 'error');
+                            show_toastr('Error', 'An error occurred while updating the form.', 'error');
                         }
 
                         // Show validation errors
@@ -792,4 +796,5 @@
 <?php $__env->stopPush(); ?>
 
 
-<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\wamp-new\www\dppum\resources\views/member-details/form.blade.php ENDPATH**/ ?>
+
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\wamp-new\www\dppum\resources\views/member-details/edit.blade.php ENDPATH**/ ?>

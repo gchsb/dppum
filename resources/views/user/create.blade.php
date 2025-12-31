@@ -24,7 +24,13 @@
             {{ Form::label('phone_number', __('Phone Number'), ['class' => 'form-label']) }}
             {{ Form::text('phone_number', null, ['class' => 'form-control', 'placeholder' => __('Enter phone number')]) }}
         </div>
-        <div class="form-group {{ \Auth::user()->type == 'super admin' ? 'col-md-12 col-lg-12' : 'col-md-6 col-lg-6' }}">
+
+        <div class="form-group col-md-6">
+            {{ Form::label('state', __('State'), ['class' => 'form-label']) }}
+            {{ Form::text('state', null, ['class' => 'form-control', 'placeholder' => __('Enter State')]) }}
+        </div>
+        <div
+            class="form-group {{ \Auth::user()->type == 'super admin' ? 'col-md-12 col-lg-12' : 'col-md-6 col-lg-6' }}">
             {{ Form::label('profile', __('Profile'), ['class' => 'form-label']) }}
             {{ Form::file('profile', ['class' => 'form-control']) }}
         </div>

@@ -96,6 +96,41 @@
             </div>
         </div>
 
+        <?php
+            $currentMember = \App\Models\Member::where('user_id', Auth::id())->first();
+            $memberDetails = $currentMember ? \App\Models\MemberDetail::where('member_id', $currentMember->id)->first() : null;
+        ?>
+
+        <?php if($currentMember && $currentMember->form_submitted && $memberDetails): ?>
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><?php echo e(__('Your Member Details')); ?></h5>
+                    <a href="<?php echo e(route('member-details.edit')); ?>" class="btn btn-sm btn-primary">
+                        <i class="ti ti-edit"></i> <?php echo e(__('Edit Details')); ?>
+
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p class="mb-2"><strong><?php echo e(__('Full Name')); ?>:</strong> <?php echo e($memberDetails->full_name); ?></p>
+                            <p class="mb-2"><strong><?php echo e(__('Business/Company')); ?>:</strong> <?php echo e($memberDetails->business_company_name); ?></p>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="mb-2"><strong><?php echo e(__('Phone/WhatsApp')); ?>:</strong> <?php echo e($memberDetails->phone_whatsapp); ?></p>
+                            <p class="mb-2"><strong><?php echo e(__('Office State')); ?>:</strong> <?php echo e($memberDetails->office_state); ?></p>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="mb-2"><strong><?php echo e(__('SSM Status')); ?>:</strong> <?php echo e($memberDetails->ssm_status); ?></p>
+                            <p class="mb-2"><strong><?php echo e(__('Last Updated')); ?>:</strong> <?php echo e($memberDetails->updated_at->format('d M Y')); ?></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
+
 
 
         <div class="col-sm-12 mb-5">

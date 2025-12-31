@@ -42,5 +42,10 @@ class Member extends Model
         return $this->hasOne(MemberDetail::class);
     }
 
+    public function products()
+    {
+        return $this->hasMany(MemberProduct::class);
+    }
+
 
 }

@@ -37,10 +37,10 @@
                 <div class="col-lg-12">
                     <!-- Owner Selection -->
                     <div class="form-floating mb-3">
-                        <?php echo e(Form::select('owner_id', $ownersList, old('owner_id'), ['class' => 'form-select', 'id' => 'owner_id', 'required' => 'required', 'style' => 'padding-top: 1.625rem; padding-bottom: 0.625rem;'])); ?>
+                        <?php echo e(Form::select('owner_id', $ownersList, old('owner_id'), ['class' => 'form-select', 'id' => 'owner_id', 'required' => 'required', 'style' => 'text-transform: uppercase; padding-top: 1.625rem; padding-bottom: 0.625rem;'])); ?>
 
-                        <label for="owner_id"><?php echo e(__('Select State Leader')); ?> <span class="text-danger">*</span></label>
-                        <small class="form-text text-muted mt-1 d-block"><?php echo e(__('Please select the State Leader as per your state.')); ?></small>
+                        <label for="owner_id"><?php echo e(__('Select State ')); ?> <span class="text-danger">*</span></label>
+                        <small class="form-text text-muted mt-1 d-block"><?php echo e(__('Please select the State ')); ?></small>
                         <?php $__errorArgs = ['owner_id'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -168,7 +168,7 @@ unset($__errorArgs, $__bag); ?>
                             <?php echo e(Form::text('phone', old('phone'), ['class' => 'form-control' . ($errors->has('phone') ? ' is-invalid' : ''), 'id' => 'phone', 'placeholder' => __('Phone Number'), 'required' => 'required'])); ?>
 
                             <label for="phone"><?php echo e(__('Phone Number')); ?> <span class="text-danger">*</span></label>
-                            <small class="form-text text-muted mt-1 d-block"><?php echo e(__('Please enter with country code. e.g., +91XXXXXXXXXX')); ?></small>
+                            <small class="form-text text-muted mt-1 d-block"><?php echo e(__('Please enter with country code. e.g., +60XXXXXXXXXX')); ?></small>
                             <?php $__errorArgs = ['phone'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :

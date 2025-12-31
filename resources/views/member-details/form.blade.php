@@ -155,29 +155,29 @@
 
                         <!-- Step 1: Basic Information -->
                         <div class="form-step active" data-step="1">
-                            <h4 class="mb-4">Section A: Basic Information</h4>
+                            <h4 class="mb-4">Section A: Basic Information (Maklumat Asas)</h4>
                             
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label for="full_name" class="form-label required-field">Full Name</label>
+                                    <label for="full_name" class="form-label required-field">Full Name (Nama Penuh)</label>
                                     <input type="text" class="form-control" id="full_name" name="full_name" 
                                            placeholder="Enter your full name" value="{{ $existingData->full_name ?? $member->first_name . ' ' . $member->last_name }}" required>
                                 </div>
                                 
                                 <div class="form-group col-md-6">
-                                    <label for="phone_whatsapp" class="form-label required-field">Phone Number / WhatsApp</label>
+                                    <label for="phone_whatsapp" class="form-label required-field">Phone Number / WhatsApp (Nombor Telefon / WhatsApp)</label>
                                     <input type="text" class="form-control" id="phone_whatsapp" name="phone_whatsapp" 
                                            placeholder="Enter your phone/WhatsApp number" value="{{ $existingData->phone_whatsapp ?? $member->phone }}" required>
                                 </div>
                                 
                                 <div class="form-group col-md-12">
-                                    <label for="business_company_name" class="form-label required-field">Business / Company Name</label>
+                                    <label for="business_company_name" class="form-label required-field">Business / Company Name (Nama Perniagaan / Syarikat)</label>
                                     <input type="text" class="form-control" id="business_company_name" name="business_company_name" 
                                            placeholder="Enter your business/company name" value="{{ $existingData->business_company_name ?? '' }}" required>
                                 </div>
                                 
                                 <div class="form-group col-md-12">
-                                    <label class="form-label required-field">Your Role in the Company / Business (Multiple selection allowed)</label>
+                                    <label class="form-label required-field">Your Role in the Company / Business (Peranan Anda dalam Syarikat / Perniagaan) (Multiple selection allowed)</label>
                                     <div class="checkbox-group">
                                         @php
                                             $roles = [
@@ -223,11 +223,11 @@
 
                         <!-- Step 2: NGO & Business Registration -->
                         <div class="form-step" data-step="2">
-                            <h4 class="mb-4">NGO Representation & Business Registration</h4>
+                            <h4 class="mb-4">NGO Representation & Business Registration (Perwakilan NGO & Pendaftaran Perniagaan)</h4>
                             
                             <div class="row">
                                 <div class="form-group col-md-12">
-                                    <label class="form-label required-field">Do you represent any NGO?</label>
+                                    <label class="form-label required-field">Do you represent any NGO? (Adakah anda mewakili mana-mana NGO?)</label>
                                     <div>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="represent_ngo" id="ngo_yes" 
@@ -245,7 +245,7 @@
                                 <div id="ngo_details" class="conditional-field" style="display: none;">
                                     <div class="row">
                                         <div class="form-group col-md-4">
-                                            <label for="ngo_position" class="form-label">Your Position in the NGO</label>
+                                            <label for="ngo_position" class="form-label">Your Position in the NGO (Jawatan Anda dalam NGO)</label>
                                             <select class="form-control" id="ngo_position" name="ngo_position">
                                                 <option value="">Select Position</option>
                                                 <option value="President" {{ ($existingData->ngo_position ?? '') == 'President' ? 'selected' : '' }}>President</option>
@@ -258,13 +258,13 @@
                                         </div>
                                         
                                         <div class="form-group col-md-4">
-                                            <label for="ngo_name" class="form-label">NGO Name</label>
+                                            <label for="ngo_name" class="form-label">NGO Name (Nama NGO)</label>
                                             <input type="text" class="form-control" id="ngo_name" name="ngo_name" 
                                                    placeholder="Enter NGO name" value="{{ $existingData->ngo_name ?? '' }}">
                                         </div>
                                         
                                         <div class="form-group col-md-4">
-                                            <label for="ngo_business_count" class="form-label">Estimated number of businesses under your NGO</label>
+                                            <label for="ngo_business_count" class="form-label">Estimated number of businesses under your NGO (Anggaran bilangan perniagaan di bawah NGO anda)</label>
                                             <select class="form-control" id="ngo_business_count" name="ngo_business_count">
                                                 <option value="">Select Range</option>
                                                 <option value="Less than 10 people" {{ ($existingData->ngo_business_count ?? '') == 'Less than 10 people' ? 'selected' : '' }}>Less than 10 people</option>
@@ -278,10 +278,10 @@
                                 </div>
 
                                 <div class="col-md-12"><hr class="my-4"></div>
-                                <h5 class="mb-3">Section B: Business Registration</h5>
+                                <h5 class="mb-3">Section B: Business Registration (Pendaftaran Perniagaan)</h5>
                                 
                                 <div class="form-group col-md-6">
-                                    <label class="form-label required-field">Do you have SSM business registration?</label>
+                                    <label class="form-label required-field">Do you have SSM business registration? (Adakah anda mempunyai pendaftaran perniagaan SSM?)</label>
                                     <select class="form-control" name="ssm_status" required>
                                         <option value="">Select Option</option>
                                         <option value="Yes, I already have SSM" {{ ($existingData->ssm_status ?? '') == 'Yes, I already have SSM' ? 'selected' : '' }}>Yes, I already have SSM</option>
@@ -291,14 +291,14 @@
                                 </div>
                                 
                                 <div class="form-group col-md-6">
-                                    <label for="ssm_registration_number" class="form-label required-field">SSM Registration Number</label>
+                                    <label for="ssm_registration_number" class="form-label required-field">SSM Registration Number (Nombor Pendaftaran SSM)</label>
                                     <input type="text" class="form-control" id="ssm_registration_number" name="ssm_registration_number" 
                                            placeholder="Enter SSM number or 'None'" value="{{ $existingData->ssm_registration_number ?? '' }}" required>
                                     <small class="form-text text-muted">Write "None" if not available</small>
                                 </div>
                                 
                                 <div class="form-group col-md-6">
-                                    <label class="form-label required-field">Do you have a Bank Account?</label>
+                                    <label class="form-label required-field">Do you have a Bank Account? (Adakah anda mempunyai Akaun Bank?)</label>
                                     <div>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="has_bank_account" id="bank_yes" 
@@ -317,17 +317,17 @@
 
                         <!-- Step 3: Location & Proof -->
                         <div class="form-step" data-step="3">
-                            <h4 class="mb-4">Section D: Location & Proof</h4>
+                            <h4 class="mb-4">Section D: Location & Proof (Lokasi & Bukti)</h4>
                             
                             <div class="row">
                                 <div class="form-group col-md-12">
-                                    <label for="office_address" class="form-label required-field">Office / Premise / Shop Address</label>
+                                    <label for="office_address" class="form-label required-field">Office / Premise / Shop Address (Alamat Pejabat / Premis / Kedai)</label>
                                     <textarea class="form-control" id="office_address" name="office_address" rows="3" 
                                               placeholder="Enter your business address" required>{{ $existingData->office_address ?? '' }}</textarea>
                                 </div>
                                 
                                 <div class="form-group col-md-6">
-                                    <label for="office_state" class="form-label required-field">State of Office / Premise / Shop</label>
+                                    <label for="office_state" class="form-label required-field">State of Office / Premise / Shop (Negeri Pejabat / Premis / Kedai)</label>
                                     <select class="form-control" id="office_state" name="office_state" required>
                                         <option value="">Select State</option>
                                         @php
@@ -345,7 +345,7 @@
                                 </div>
                                 
                                 <div class="form-group col-md-6">
-                                    <label for="office_district" class="form-label required-field">District of Office / Premise / Shop</label>
+                                    <label for="office_district" class="form-label required-field">District of Office / Premise / Shop (Daerah Pejabat / Premis / Kedai)</label>
                                     <input type="text" class="form-control" id="office_district" name="office_district" 
                                            placeholder="Enter district" value="{{ $existingData->office_district ?? '' }}" required>
                                 </div>
@@ -354,11 +354,11 @@
 
                         <!-- Step 4: Business Issues -->
                         <div class="form-step" data-step="4">
-                            <h4 class="mb-4">Current Business Issues & Support</h4>
+                            <h4 class="mb-4">Current Business Issues & Support (Isu Perniagaan Semasa & Sokongan)</h4>
                             
                             <div class="row">
                                 <div class="form-group col-md-12">
-                                    <label class="form-label required-field">Problems / Constraints in your current business (Multiple selection allowed)</label>
+                                    <label class="form-label required-field">Problems / Constraints in your current business (Masalah / Kekangan dalam perniagaan semasa anda) (Multiple selection allowed)</label>
                                     <div class="checkbox-group">
                                         @php
                                             $problems = [
@@ -392,7 +392,7 @@
                                 </div>
                                 
                                 <div class="form-group col-md-12">
-                                    <label class="form-label required-field">Support / Assistance Required (Multiple selection allowed)</label>
+                                    <label class="form-label required-field">Support / Assistance Required (Sokongan / Bantuan Diperlukan) (Multiple selection allowed)</label>
                                     <div class="checkbox-group">
                                         @php
                                             $supports = [
@@ -425,7 +425,7 @@
                                 </div>
                                 
                                 <div class="form-group col-md-12">
-                                    <label for="suggestions_feedback" class="form-label required-field">Suggestions / Feedback for DPPUM</label>
+                                    <label for="suggestions_feedback" class="form-label required-field">Suggestions / Feedback for DPPUM (Cadangan / Maklum Balas untuk DPPUM)</label>
                                     <textarea class="form-control" id="suggestions_feedback" name="suggestions_feedback" rows="4" 
                                               placeholder="Share your suggestions or feedback" required>{{ $existingData->suggestions_feedback ?? '' }}</textarea>
                                 </div>
@@ -434,11 +434,11 @@
 
                         <!-- Step 5: Social Media & Referral -->
                         <div class="form-step" data-step="5">
-                            <h4 class="mb-4">Social Media, Delivery App & Referral</h4>
+                            <h4 class="mb-4">Social Media, Delivery App & Referral (Media Sosial, Aplikasi Penghantaran & Rujukan)</h4>
                             
                             <div class="row">
                                 <div class="form-group col-md-12">
-                                    <label class="form-label">Do you have any social media accounts? (Multiple selection allowed)</label>
+                                    <label class="form-label">Do you have any social media accounts? (Adakah anda mempunyai akaun media sosial?) (Multiple selection allowed)</label>
                                     <div class="checkbox-group">
                                         @php
                                             $socialMedia = [
@@ -471,17 +471,17 @@
                                 </div>
                                 
                                 <div class="form-group col-md-12">
-                                    <label for="social_media_link" class="form-label">Business Social Media / Website Link</label>
+                                    <label for="social_media_link" class="form-label">Business Social Media / Website Link (Pautan Media Sosial / Laman Web Perniagaan)</label>
                                     <input type="text" class="form-control" id="social_media_link" name="social_media_link" 
                                            placeholder="Enter your business link or write 'None'" value="{{ $existingData->social_media_link ?? '' }}">
                                     <small class="form-text text-muted">Write "None" if not available</small>
                                 </div>
                                 
                                 <div class="col-md-12"><hr class="my-4"></div>
-                                <h5 class="mb-3">Section G: Business Listing in Food Delivery App</h5>
+                                <h5 class="mb-3">Section G: Business Listing in Food Delivery App (Penyenaraian Perniagaan dalam Aplikasi Penghantaran Makanan)</h5>
                                 
                                 <div class="form-group col-md-12">
-                                    <label class="form-label required-field">Are you interested in listing your product/menu/service in the Delivery App for FREE?</label>
+                                    <label class="form-label required-field">Are you interested in listing your product/menu/service in the Delivery App for FREE? (Adakah anda berminat untuk menyenaraikan produk/menu/perkhidmatan anda dalam Aplikasi Penghantaran secara PERCUMA?)</label>
                                     <div>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="delivery_app_interest" id="delivery_yes" 
@@ -497,10 +497,10 @@
                                 </div>
                                 
                                 <div class="col-md-12"><hr class="my-4"></div>
-                                <h5 class="mb-3">Section H: Referral / Source</h5>
+                                <h5 class="mb-3">Section H: Referral / Source (Rujukan / Sumber)</h5>
                                 
                                 <div class="form-group col-md-12">
-                                    <label class="form-label required-field">Through which social media platform did you first learn about DPPUM? (Multiple selection allowed)</label>
+                                    <label class="form-label required-field">Through which social media platform did you first learn about DPPUM? (Melalui platform media sosial manakah anda mula-mula mengetahui tentang DPPUM?) (Multiple selection allowed)</label>
                                     <div class="checkbox-group">
                                         @php
                                             $learnedFrom = [
@@ -525,21 +525,21 @@
                                 </div>
                                 
                                 <div class="form-group col-md-12">
-                                    <label for="invited_by" class="form-label required-field">Who invited or recommended you to join DPPUM?</label>
+                                    <label for="invited_by" class="form-label required-field">Who invited or recommended you to join DPPUM? (Siapa yang menjemput atau mengesyorkan anda untuk menyertai DPPUM?)</label>
                                     <input type="text" class="form-control" id="invited_by" name="invited_by" 
                                            placeholder="Enter the name of the person who referred you" value="{{ $existingData->invited_by ?? '' }}" required>
                                     <small class="form-text text-muted">Note: In some states, DPPUM organizes lucky draws/competitions based on referrals.</small>
                                 </div>
                                 
                                 <div class="col-md-12"><hr class="my-4"></div>
-                                <h5 class="mb-3">Final Declaration</h5>
+                                <h5 class="mb-3">Final Declaration (Perisytiharan Akhir)</h5>
                                 
                                 <div class="form-group col-md-12">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="declaration_consent" name="declaration_consent" 
                                                value="1" {{ ($existingData->declaration_consent ?? false) ? 'checked' : '' }} required>
                                         <label class="form-check-label" for="declaration_consent">
-                                            <strong>I agree that the information provided is true and allow DPPUM to use it for monitoring, reference, and future improvement actions.</strong>
+                                            <strong>I agree that the information provided is true and allow DPPUM to use it for monitoring, reference, and future improvement actions. (Saya bersetuju bahawa maklumat yang diberikan adalah benar dan membenarkan DPPUM menggunakannya untuk pemantauan, rujukan, dan tindakan penambahbaikan masa hadapan.)</strong>
                                         </label>
                                     </div>
                                 </div>

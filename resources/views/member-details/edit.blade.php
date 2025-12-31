@@ -1,18 +1,17 @@
+@extends('layouts.app')
 
+@section('page-title')
+    {{ __('Edit Your Member Details') }}
+@endsection
 
-<?php $__env->startSection('page-title'); ?>
-    <?php echo e(__('Complete Your Member Details')); ?>
-
-<?php $__env->stopSection(); ?>
-
-<?php $__env->startSection('breadcrumb'); ?>
+@section('breadcrumb')
     <ul class="breadcrumb">
-        <li class="breadcrumb-item"><a href="<?php echo e(route('dashboard')); ?>"><?php echo e(__('Dashboard')); ?></a></li>
-        <li class="breadcrumb-item active" aria-current="page"><?php echo e(__('Member Details')); ?></li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ __('Edit Member Details') }}</li>
     </ul>
-<?php $__env->stopSection(); ?>
+@endsection
 
-<?php $__env->startSection('content'); ?>
+@section('content')
     <style>
         .step-indicator {
             display: flex;
@@ -127,6 +126,10 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
+                    <div class="alert alert-info mb-4">
+                        <i class="ti ti-info-circle"></i> You are editing your member details. All fields marked with <span class="text-danger">*</span> are required.
+                    </div>
+
                     <!-- Step Indicator -->
                     <div class="step-indicator">
                         <div class="step active" data-step="1">
@@ -152,7 +155,7 @@
                     </div>
 
                     <form id="memberDetailsForm" method="POST">
-                        <?php echo csrf_field(); ?>
+                        @csrf
 
                         <!-- Step 1: Basic Information -->
                         <div class="form-step active" data-step="1">
@@ -162,25 +165,25 @@
                                 <div class="form-group col-md-6">
                                     <label for="full_name" class="form-label required-field">Full Name (Nama Penuh)</label>
                                     <input type="text" class="form-control" id="full_name" name="full_name" 
-                                           placeholder="Enter your full name" value="<?php echo e($existingData->full_name ?? $member->first_name . ' ' . $member->last_name); ?>" required>
+                                           placeholder="Enter your full name" value="{{ $existingData->full_name ?? $member->first_name . ' ' . $member->last_name }}" required>
                                 </div>
                                 
                                 <div class="form-group col-md-6">
                                     <label for="phone_whatsapp" class="form-label required-field">Phone Number / WhatsApp (Nombor Telefon / WhatsApp)</label>
                                     <input type="text" class="form-control" id="phone_whatsapp" name="phone_whatsapp" 
-                                           placeholder="Enter your phone/WhatsApp number" value="<?php echo e($existingData->phone_whatsapp ?? $member->phone); ?>" required>
+                                           placeholder="Enter your phone/WhatsApp number" value="{{ $existingData->phone_whatsapp ?? $member->phone }}" required>
                                 </div>
                                 
                                 <div class="form-group col-md-12">
                                     <label for="business_company_name" class="form-label required-field">Business / Company Name (Nama Perniagaan / Syarikat)</label>
                                     <input type="text" class="form-control" id="business_company_name" name="business_company_name" 
-                                           placeholder="Enter your business/company name" value="<?php echo e($existingData->business_company_name ?? ''); ?>" required>
+                                           placeholder="Enter your business/company name" value="{{ $existingData->business_company_name ?? '' }}" required>
                                 </div>
                                 
                                 <div class="form-group col-md-12">
                                     <label class="form-label required-field">Your Role in the Company / Business (Peranan Anda dalam Syarikat / Perniagaan) (Multiple selection allowed)</label>
                                     <div class="checkbox-group">
-                                        <?php
+                                        @php
                                             $roles = [
                                                 'Company Owner',
                                                 'Founder',
@@ -200,23 +203,23 @@
                                                 'Strategic Partner / Business Partner'
                                             ];
                                             $selectedRoles = $existingData->role_in_company ?? [];
-                                        ?>
-                                        <?php $__currentLoopData = $roles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $role): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        @endphp
+                                        @foreach($roles as $role)
                                             <div class="checkbox-item">
-                                                <input type="checkbox" id="role_<?php echo e($loop->index); ?>" name="role_in_company[]" 
-                                                       value="<?php echo e($role); ?>" <?php echo e(in_array($role, $selectedRoles) ? 'checked' : ''); ?>>
-                                                <label for="role_<?php echo e($loop->index); ?>"><?php echo e($role); ?></label>
+                                                <input type="checkbox" id="role_{{ $loop->index }}" name="role_in_company[]" 
+                                                       value="{{ $role }}" {{ in_array($role, $selectedRoles) ? 'checked' : '' }}>
+                                                <label for="role_{{ $loop->index }}">{{ $role }}</label>
                                             </div>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        @endforeach
                                         <div class="checkbox-item">
                                             <input type="checkbox" id="role_other_check" name="role_in_company[]" 
-                                                   value="Other" <?php echo e(in_array('Other', $selectedRoles) ? 'checked' : ''); ?>>
+                                                   value="Other" {{ in_array('Other', $selectedRoles) ? 'checked' : '' }}>
                                             <label for="role_other_check">Other (Specify)</label>
                                         </div>
                                     </div>
                                     <div id="role_other_field" class="conditional-field">
                                         <input type="text" class="form-control" id="role_other" name="role_other" 
-                                               placeholder="Please specify your role" value="<?php echo e($existingData->role_other ?? ''); ?>">
+                                               placeholder="Please specify your role" value="{{ $existingData->role_other ?? '' }}">
                                     </div>
                                 </div>
                             </div>
@@ -232,12 +235,12 @@
                                     <div>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="represent_ngo" id="ngo_yes" 
-                                                   value="Yes" <?php echo e(($existingData->represent_ngo ?? '') == 'Yes' ? 'checked' : ''); ?> required>
+                                                   value="Yes" {{ ($existingData->represent_ngo ?? '') == 'Yes' ? 'checked' : '' }} required>
                                             <label class="form-check-label" for="ngo_yes">Yes</label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="represent_ngo" id="ngo_no" 
-                                                   value="No" <?php echo e(($existingData->represent_ngo ?? 'No') == 'No' ? 'checked' : ''); ?>>
+                                                   value="No" {{ ($existingData->represent_ngo ?? 'No') == 'No' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="ngo_no">No</label>
                                         </div>
                                     </div>
@@ -249,30 +252,30 @@
                                             <label for="ngo_position" class="form-label">Your Position in the NGO (Jawatan Anda dalam NGO)</label>
                                             <select class="form-control" id="ngo_position" name="ngo_position">
                                                 <option value="">Select Position</option>
-                                                <option value="President" <?php echo e(($existingData->ngo_position ?? '') == 'President' ? 'selected' : ''); ?>>President</option>
-                                                <option value="Vice President" <?php echo e(($existingData->ngo_position ?? '') == 'Vice President' ? 'selected' : ''); ?>>Vice President</option>
-                                                <option value="Secretary" <?php echo e(($existingData->ngo_position ?? '') == 'Secretary' ? 'selected' : ''); ?>>Secretary</option>
-                                                <option value="Treasurer" <?php echo e(($existingData->ngo_position ?? '') == 'Treasurer' ? 'selected' : ''); ?>>Treasurer</option>
-                                                <option value="Committee Member" <?php echo e(($existingData->ngo_position ?? '') == 'Committee Member' ? 'selected' : ''); ?>>Committee Member</option>
-                                                <option value="Other" <?php echo e(($existingData->ngo_position ?? '') == 'Other' ? 'selected' : ''); ?>>Other</option>
+                                                <option value="President" {{ ($existingData->ngo_position ?? '') == 'President' ? 'selected' : '' }}>President</option>
+                                                <option value="Vice President" {{ ($existingData->ngo_position ?? '') == 'Vice President' ? 'selected' : '' }}>Vice President</option>
+                                                <option value="Secretary" {{ ($existingData->ngo_position ?? '') == 'Secretary' ? 'selected' : '' }}>Secretary</option>
+                                                <option value="Treasurer" {{ ($existingData->ngo_position ?? '') == 'Treasurer' ? 'selected' : '' }}>Treasurer</option>
+                                                <option value="Committee Member" {{ ($existingData->ngo_position ?? '') == 'Committee Member' ? 'selected' : '' }}>Committee Member</option>
+                                                <option value="Other" {{ ($existingData->ngo_position ?? '') == 'Other' ? 'selected' : '' }}>Other</option>
                                             </select>
                                         </div>
                                         
                                         <div class="form-group col-md-4">
                                             <label for="ngo_name" class="form-label">NGO Name (Nama NGO)</label>
                                             <input type="text" class="form-control" id="ngo_name" name="ngo_name" 
-                                                   placeholder="Enter NGO name" value="<?php echo e($existingData->ngo_name ?? ''); ?>">
+                                                   placeholder="Enter NGO name" value="{{ $existingData->ngo_name ?? '' }}">
                                         </div>
                                         
                                         <div class="form-group col-md-4">
                                             <label for="ngo_business_count" class="form-label">Estimated number of businesses under your NGO (Anggaran bilangan perniagaan di bawah NGO anda)</label>
                                             <select class="form-control" id="ngo_business_count" name="ngo_business_count">
                                                 <option value="">Select Range</option>
-                                                <option value="Less than 10 people" <?php echo e(($existingData->ngo_business_count ?? '') == 'Less than 10 people' ? 'selected' : ''); ?>>Less than 10 people</option>
-                                                <option value="10 – 50 people" <?php echo e(($existingData->ngo_business_count ?? '') == '10 – 50 people' ? 'selected' : ''); ?>>10 – 50 people</option>
-                                                <option value="51 – 100 people" <?php echo e(($existingData->ngo_business_count ?? '') == '51 – 100 people' ? 'selected' : ''); ?>>51 – 100 people</option>
-                                                <option value="101 – 500 people" <?php echo e(($existingData->ngo_business_count ?? '') == '101 – 500 people' ? 'selected' : ''); ?>>101 – 500 people</option>
-                                                <option value="Others" <?php echo e(($existingData->ngo_business_count ?? '') == 'Others' ? 'selected' : ''); ?>>Others</option>
+                                                <option value="Less than 10 people" {{ ($existingData->ngo_business_count ?? '') == 'Less than 10 people' ? 'selected' : '' }}>Less than 10 people</option>
+                                                <option value="10 – 50 people" {{ ($existingData->ngo_business_count ?? '') == '10 – 50 people' ? 'selected' : '' }}>10 – 50 people</option>
+                                                <option value="51 – 100 people" {{ ($existingData->ngo_business_count ?? '') == '51 – 100 people' ? 'selected' : '' }}>51 – 100 people</option>
+                                                <option value="101 – 500 people" {{ ($existingData->ngo_business_count ?? '') == '101 – 500 people' ? 'selected' : '' }}>101 – 500 people</option>
+                                                <option value="Others" {{ ($existingData->ngo_business_count ?? '') == 'Others' ? 'selected' : '' }}>Others</option>
                                             </select>
                                         </div>
                                     </div>
@@ -285,16 +288,16 @@
                                     <label class="form-label required-field">Do you have SSM business registration? (Adakah anda mempunyai pendaftaran perniagaan SSM?)</label>
                                     <select class="form-control" name="ssm_status" required>
                                         <option value="">Select Option</option>
-                                        <option value="Yes, I already have SSM" <?php echo e(($existingData->ssm_status ?? '') == 'Yes, I already have SSM' ? 'selected' : ''); ?>>Yes, I already have SSM</option>
-                                        <option value="No, but I am interested (PPUM will try to guide you)" <?php echo e(($existingData->ssm_status ?? '') == 'No, but I am interested (PPUM will try to guide you)' ? 'selected' : ''); ?>>No, but I am interested (PPUM will try to guide you)</option>
-                                        <option value="In the process of registering SSM" <?php echo e(($existingData->ssm_status ?? '') == 'In the process of registering SSM' ? 'selected' : ''); ?>>In the process of registering SSM</option>
+                                        <option value="Yes, I already have SSM" {{ ($existingData->ssm_status ?? '') == 'Yes, I already have SSM' ? 'selected' : '' }}>Yes, I already have SSM</option>
+                                        <option value="No, but I am interested (PPUM will try to guide you)" {{ ($existingData->ssm_status ?? '') == 'No, but I am interested (PPUM will try to guide you)' ? 'selected' : '' }}>No, but I am interested (PPUM will try to guide you)</option>
+                                        <option value="In the process of registering SSM" {{ ($existingData->ssm_status ?? '') == 'In the process of registering SSM' ? 'selected' : '' }}>In the process of registering SSM</option>
                                     </select>
                                 </div>
                                 
                                 <div class="form-group col-md-6">
                                     <label for="ssm_registration_number" class="form-label required-field">SSM Registration Number (Nombor Pendaftaran SSM)</label>
                                     <input type="text" class="form-control" id="ssm_registration_number" name="ssm_registration_number" 
-                                           placeholder="Enter SSM number or 'None'" value="<?php echo e($existingData->ssm_registration_number ?? ''); ?>" required>
+                                           placeholder="Enter SSM number or 'None'" value="{{ $existingData->ssm_registration_number ?? '' }}" required>
                                     <small class="form-text text-muted">Write "None" if not available</small>
                                 </div>
                                 
@@ -303,12 +306,12 @@
                                     <div>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="has_bank_account" id="bank_yes" 
-                                                   value="Yes" <?php echo e(($existingData->has_bank_account ?? '') == 'Yes' ? 'checked' : ''); ?> required>
+                                                   value="Yes" {{ ($existingData->has_bank_account ?? '') == 'Yes' ? 'checked' : '' }} required>
                                             <label class="form-check-label" for="bank_yes">Yes</label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="has_bank_account" id="bank_no" 
-                                                   value="No" <?php echo e(($existingData->has_bank_account ?? '') == 'No' ? 'checked' : ''); ?>>
+                                                   value="No" {{ ($existingData->has_bank_account ?? '') == 'No' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="bank_no">No</label>
                                         </div>
                                     </div>
@@ -324,31 +327,31 @@
                                 <div class="form-group col-md-12">
                                     <label for="office_address" class="form-label required-field">Office / Premise / Shop Address (Alamat Pejabat / Premis / Kedai)</label>
                                     <textarea class="form-control" id="office_address" name="office_address" rows="3" 
-                                              placeholder="Enter your business address" required><?php echo e($existingData->office_address ?? ''); ?></textarea>
+                                              placeholder="Enter your business address" required>{{ $existingData->office_address ?? '' }}</textarea>
                                 </div>
                                 
                                 <div class="form-group col-md-6">
                                     <label for="office_state" class="form-label required-field">State of Office / Premise / Shop (Negeri Pejabat / Premis / Kedai)</label>
                                     <select class="form-control" id="office_state" name="office_state" required>
                                         <option value="">Select State</option>
-                                        <?php
+                                        @php
                                             $malaysianStates = [
                                                 'Johor', 'Kedah', 'Kelantan', 'Melaka', 'Negeri Sembilan',
                                                 'Pahang', 'Penang', 'Perak', 'Perlis', 'Sabah',
                                                 'Sarawak', 'Selangor', 'Terengganu', 'Kuala Lumpur', 
                                                 'Labuan', 'Putrajaya'
                                             ];
-                                        ?>
-                                        <?php $__currentLoopData = $malaysianStates; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $state): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <option value="<?php echo e($state); ?>" <?php echo e(($existingData->office_state ?? '') == $state ? 'selected' : ''); ?>><?php echo e($state); ?></option>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        @endphp
+                                        @foreach($malaysianStates as $state)
+                                            <option value="{{ $state }}" {{ ($existingData->office_state ?? '') == $state ? 'selected' : '' }}>{{ $state }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 
                                 <div class="form-group col-md-6">
                                     <label for="office_district" class="form-label required-field">District of Office / Premise / Shop (Daerah Pejabat / Premis / Kedai)</label>
                                     <input type="text" class="form-control" id="office_district" name="office_district" 
-                                           placeholder="Enter district" value="<?php echo e($existingData->office_district ?? ''); ?>" required>
+                                           placeholder="Enter district" value="{{ $existingData->office_district ?? '' }}" required>
                                 </div>
                             </div>
                         </div>
@@ -361,7 +364,7 @@
                                 <div class="form-group col-md-12">
                                     <label class="form-label required-field">Problems / Constraints in your current business (Masalah / Kekangan dalam perniagaan semasa anda) (Multiple selection allowed)</label>
                                     <div class="checkbox-group">
-                                        <?php
+                                        @php
                                             $problems = [
                                                 'Capital',
                                                 'License / Permit',
@@ -372,30 +375,30 @@
                                                 'Networking'
                                             ];
                                             $selectedProblems = $existingData->business_problems ?? [];
-                                        ?>
-                                        <?php $__currentLoopData = $problems; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $problem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        @endphp
+                                        @foreach($problems as $problem)
                                             <div class="checkbox-item">
-                                                <input type="checkbox" id="problem_<?php echo e($loop->index); ?>" name="business_problems[]" 
-                                                       value="<?php echo e($problem); ?>" <?php echo e(in_array($problem, $selectedProblems) ? 'checked' : ''); ?>>
-                                                <label for="problem_<?php echo e($loop->index); ?>"><?php echo e($problem); ?></label>
+                                                <input type="checkbox" id="problem_{{ $loop->index }}" name="business_problems[]" 
+                                                       value="{{ $problem }}" {{ in_array($problem, $selectedProblems) ? 'checked' : '' }}>
+                                                <label for="problem_{{ $loop->index }}">{{ $problem }}</label>
                                             </div>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        @endforeach
                                         <div class="checkbox-item">
                                             <input type="checkbox" id="problem_other_check" name="business_problems[]" 
-                                                   value="Other" <?php echo e(in_array('Other', $selectedProblems) ? 'checked' : ''); ?>>
+                                                   value="Other" {{ in_array('Other', $selectedProblems) ? 'checked' : '' }}>
                                             <label for="problem_other_check">Other (Specify)</label>
                                         </div>
                                     </div>
                                     <div id="problem_other_field" class="conditional-field">
                                         <input type="text" class="form-control" id="business_problems_other" name="business_problems_other" 
-                                               placeholder="Please specify other problems" value="<?php echo e($existingData->business_problems_other ?? ''); ?>">
+                                               placeholder="Please specify other problems" value="{{ $existingData->business_problems_other ?? '' }}">
                                     </div>
                                 </div>
                                 
                                 <div class="form-group col-md-12">
                                     <label class="form-label required-field">Support / Assistance Required (Sokongan / Bantuan Diperlukan) (Multiple selection allowed)</label>
                                     <div class="checkbox-group">
-                                        <?php
+                                        @php
                                             $supports = [
                                                 'Financial assistance / Capital',
                                                 'Training & Courses',
@@ -405,30 +408,30 @@
                                                 'Advocacy / Business voice'
                                             ];
                                             $selectedSupports = $existingData->support_required ?? [];
-                                        ?>
-                                        <?php $__currentLoopData = $supports; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $support): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        @endphp
+                                        @foreach($supports as $support)
                                             <div class="checkbox-item">
-                                                <input type="checkbox" id="support_<?php echo e($loop->index); ?>" name="support_required[]" 
-                                                       value="<?php echo e($support); ?>" <?php echo e(in_array($support, $selectedSupports) ? 'checked' : ''); ?>>
-                                                <label for="support_<?php echo e($loop->index); ?>"><?php echo e($support); ?></label>
+                                                <input type="checkbox" id="support_{{ $loop->index }}" name="support_required[]" 
+                                                       value="{{ $support }}" {{ in_array($support, $selectedSupports) ? 'checked' : '' }}>
+                                                <label for="support_{{ $loop->index }}">{{ $support }}</label>
                                             </div>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        @endforeach
                                         <div class="checkbox-item">
                                             <input type="checkbox" id="support_other_check" name="support_required[]" 
-                                                   value="Other" <?php echo e(in_array('Other', $selectedSupports) ? 'checked' : ''); ?>>
+                                                   value="Other" {{ in_array('Other', $selectedSupports) ? 'checked' : '' }}>
                                             <label for="support_other_check">Other (Specify)</label>
                                         </div>
                                     </div>
                                     <div id="support_other_field" class="conditional-field">
                                         <input type="text" class="form-control" id="support_required_other" name="support_required_other" 
-                                               placeholder="Please specify other support needed" value="<?php echo e($existingData->support_required_other ?? ''); ?>">
+                                               placeholder="Please specify other support needed" value="{{ $existingData->support_required_other ?? '' }}">
                                     </div>
                                 </div>
                                 
                                 <div class="form-group col-md-12">
                                     <label for="suggestions_feedback" class="form-label required-field">Suggestions / Feedback for DPPUM (Cadangan / Maklum Balas untuk DPPUM)</label>
                                     <textarea class="form-control" id="suggestions_feedback" name="suggestions_feedback" rows="4" 
-                                              placeholder="Share your suggestions or feedback" required><?php echo e($existingData->suggestions_feedback ?? ''); ?></textarea>
+                                              placeholder="Share your suggestions or feedback" required>{{ $existingData->suggestions_feedback ?? '' }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -441,7 +444,7 @@
                                 <div class="form-group col-md-12">
                                     <label class="form-label">Do you have any social media accounts? (Adakah anda mempunyai akaun media sosial?) (Multiple selection allowed)</label>
                                     <div class="checkbox-group">
-                                        <?php
+                                        @php
                                             $socialMedia = [
                                                 'TikTok',
                                                 'Facebook',
@@ -451,30 +454,30 @@
                                                 'None'
                                             ];
                                             $selectedSocial = $existingData->social_media_accounts ?? [];
-                                        ?>
-                                        <?php $__currentLoopData = $socialMedia; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $media): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        @endphp
+                                        @foreach($socialMedia as $media)
                                             <div class="checkbox-item">
-                                                <input type="checkbox" id="social_<?php echo e($loop->index); ?>" name="social_media_accounts[]" 
-                                                       value="<?php echo e($media); ?>" <?php echo e(in_array($media, $selectedSocial) ? 'checked' : ''); ?>>
-                                                <label for="social_<?php echo e($loop->index); ?>"><?php echo e($media); ?></label>
+                                                <input type="checkbox" id="social_{{ $loop->index }}" name="social_media_accounts[]" 
+                                                       value="{{ $media }}" {{ in_array($media, $selectedSocial) ? 'checked' : '' }}>
+                                                <label for="social_{{ $loop->index }}">{{ $media }}</label>
                                             </div>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        @endforeach
                                         <div class="checkbox-item">
                                             <input type="checkbox" id="social_other_check" name="social_media_accounts[]" 
-                                                   value="Other" <?php echo e(in_array('Other', $selectedSocial) ? 'checked' : ''); ?>>
+                                                   value="Other" {{ in_array('Other', $selectedSocial) ? 'checked' : '' }}>
                                             <label for="social_other_check">Other (Specify)</label>
                                         </div>
                                     </div>
                                     <div id="social_other_field" class="conditional-field">
                                         <input type="text" class="form-control" id="social_media_other" name="social_media_other" 
-                                               placeholder="Please specify other social media" value="<?php echo e($existingData->social_media_other ?? ''); ?>">
+                                               placeholder="Please specify other social media" value="{{ $existingData->social_media_other ?? '' }}">
                                     </div>
                                 </div>
                                 
                                 <div class="form-group col-md-12">
                                     <label for="social_media_link" class="form-label">Business Social Media / Website Link (Pautan Media Sosial / Laman Web Perniagaan)</label>
                                     <input type="text" class="form-control" id="social_media_link" name="social_media_link" 
-                                           placeholder="Enter your business link or write 'None'" value="<?php echo e($existingData->social_media_link ?? ''); ?>">
+                                           placeholder="Enter your business link or write 'None'" value="{{ $existingData->social_media_link ?? '' }}">
                                     <small class="form-text text-muted">Write "None" if not available</small>
                                 </div>
                                 
@@ -486,12 +489,12 @@
                                     <div>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="delivery_app_interest" id="delivery_yes" 
-                                                   value="Yes" <?php echo e(($existingData->delivery_app_interest ?? '') == 'Yes' ? 'checked' : ''); ?> required>
+                                                   value="Yes" {{ ($existingData->delivery_app_interest ?? '') == 'Yes' ? 'checked' : '' }} required>
                                             <label class="form-check-label" for="delivery_yes">Yes</label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="delivery_app_interest" id="delivery_no" 
-                                                   value="No" <?php echo e(($existingData->delivery_app_interest ?? '') == 'No' ? 'checked' : ''); ?>>
+                                                   value="No" {{ ($existingData->delivery_app_interest ?? '') == 'No' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="delivery_no">No</label>
                                         </div>
                                     </div>
@@ -503,7 +506,7 @@
                                 <div class="form-group col-md-12">
                                     <label class="form-label required-field">Through which social media platform did you first learn about DPPUM? (Melalui platform media sosial manakah anda mula-mula mengetahui tentang DPPUM?) (Multiple selection allowed)</label>
                                     <div class="checkbox-group">
-                                        <?php
+                                        @php
                                             $learnedFrom = [
                                                 'Facebook DPPUM',
                                                 'TikTok',
@@ -514,21 +517,21 @@
                                                 'Flyers'
                                             ];
                                             $selectedLearned = $existingData->learned_from ?? [];
-                                        ?>
-                                        <?php $__currentLoopData = $learnedFrom; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $source): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        @endphp
+                                        @foreach($learnedFrom as $source)
                                             <div class="checkbox-item">
-                                                <input type="checkbox" id="learned_<?php echo e($loop->index); ?>" name="learned_from[]" 
-                                                       value="<?php echo e($source); ?>" <?php echo e(in_array($source, $selectedLearned) ? 'checked' : ''); ?>>
-                                                <label for="learned_<?php echo e($loop->index); ?>"><?php echo e($source); ?></label>
+                                                <input type="checkbox" id="learned_{{ $loop->index }}" name="learned_from[]" 
+                                                       value="{{ $source }}" {{ in_array($source, $selectedLearned) ? 'checked' : '' }}>
+                                                <label for="learned_{{ $loop->index }}">{{ $source }}</label>
                                             </div>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        @endforeach
                                     </div>
                                 </div>
                                 
                                 <div class="form-group col-md-12">
                                     <label for="invited_by" class="form-label required-field">Who invited or recommended you to join DPPUM? (Siapa yang menjemput atau mengesyorkan anda untuk menyertai DPPUM?)</label>
                                     <input type="text" class="form-control" id="invited_by" name="invited_by" 
-                                           placeholder="Enter the name of the person who referred you" value="<?php echo e($existingData->invited_by ?? ''); ?>" required>
+                                           placeholder="Enter the name of the person who referred you" value="{{ $existingData->invited_by ?? '' }}" required>
                                     <small class="form-text text-muted">Note: In some states, DPPUM organizes lucky draws/competitions based on referrals.</small>
                                 </div>
                                 
@@ -538,7 +541,7 @@
                                 <div class="form-group col-md-12">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="declaration_consent" name="declaration_consent" 
-                                               value="1" <?php echo e(($existingData->declaration_consent ?? false) ? 'checked' : ''); ?> required>
+                                               value="1" {{ ($existingData->declaration_consent ?? false) ? 'checked' : '' }} required>
                                         <label class="form-check-label" for="declaration_consent">
                                             <strong>I agree that the information provided is true and allow DPPUM to use it for monitoring, reference, and future improvement actions. (Saya bersetuju bahawa maklumat yang diberikan adalah benar dan membenarkan DPPUM menggunakannya untuk pemantauan, rujukan, dan tindakan penambahbaikan masa hadapan.)</strong>
                                         </label>
@@ -556,7 +559,7 @@
                                 Next <i class="ti ti-arrow-right"></i>
                             </button>
                             <button type="submit" class="btn btn-success" id="submitBtn" style="display: none;">
-                                <i class="ti ti-check"></i> Submit Form
+                                <i class="ti ti-check"></i> Update Details
                             </button>
                         </div>
                     </form>
@@ -565,12 +568,12 @@
         </div>
     </div>
 
-<?php $__env->stopSection(); ?>
+@endsection
 
-<?php $__env->startPush('script-page'); ?>
+@push('script-page')
     <script>
-        var successImg = '<?php echo e(asset('assets/images/notification/ok-48.png')); ?>';
-        var errorImg = '<?php echo e(asset('assets/images/notification/high_priority-48.png')); ?>';
+        var successImg = '{{ asset('assets/images/notification/ok-48.png') }}';
+        var errorImg = '{{ asset('assets/images/notification/high_priority-48.png') }}';
         
         function show_toastr(title, message, type) {
             var img = type === 'success' ? successImg : errorImg;
@@ -653,10 +656,10 @@
 
                 const formData = new FormData(this);
                 
-                $('#submitBtn').prop('disabled', true).html('<i class="ti ti-loader ti-spin"></i> Submitting...');
+                $('#submitBtn').prop('disabled', true).html('<i class="ti ti-loader ti-spin"></i> Updating...');
 
                 $.ajax({
-                    url: '<?php echo e(route("member-details.store")); ?>',
+                    url: '{{ route("member-details.update") }}',
                     method: 'POST',
                     data: formData,
                     processData: false,
@@ -670,12 +673,12 @@
                         }
                     },
                     error: function(xhr) {
-                        $('#submitBtn').prop('disabled', false).html('<i class="ti ti-check"></i> Submit Form');
+                        $('#submitBtn').prop('disabled', false).html('<i class="ti ti-check"></i> Update Details');
                         
                         if (xhr.responseJSON && xhr.responseJSON.message) {
                             show_toastr('Error', xhr.responseJSON.message, 'error');
                         } else {
-                            show_toastr('Error', 'An error occurred while submitting the form.', 'error');
+                            show_toastr('Error', 'An error occurred while updating the form.', 'error');
                         }
 
                         // Show validation errors
@@ -789,7 +792,6 @@
             return true;
         }
     </script>
-<?php $__env->stopPush(); ?>
+@endpush
 
 
-<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\wamp-new\www\dppum\resources\views/member-details/form.blade.php ENDPATH**/ ?>

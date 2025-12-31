@@ -390,6 +390,64 @@
                 </div>
             </div>
         <?php endif; ?>
+        
+        <div class="col-sm-12">
+            <div class="card table-card">
+                <div class="card-header">
+                    <div class="row align-items-center g-2">
+                        <div class="col">
+                            <h5>
+                                <?php echo e(__('Products')); ?>
+
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body pt-0">
+                    <?php if($products && $products->count() > 0): ?>
+                        <div class="dt-responsive table-responsive">
+                            <table class="table table-hover advance-datatable">
+                                <thead>
+                                    <tr>
+                                        <th><?php echo e(__('Product Name')); ?></th>
+                                        <th><?php echo e(__('Description')); ?></th>
+                                        <th><?php echo e(__('Category')); ?></th>
+                                        <th><?php echo e(__('Price')); ?></th>
+                                        <th><?php echo e(__('Quantity')); ?></th>
+                                        <th><?php echo e(__('SKU')); ?></th>
+                                        <th><?php echo e(__('Status')); ?></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <tr>
+                                            <td><?php echo e($product->product_name); ?></td>
+                                            <td><?php echo e($product->description ?? '-'); ?></td>
+                                            <td><?php echo e($product->category ?? '-'); ?></td>
+                                            <td><?php echo e(priceFormat($product->price)); ?></td>
+                                            <td><?php echo e($product->quantity); ?></td>
+                                            <td><?php echo e($product->sku ?? '-'); ?></td>
+                                            <td>
+                                                <?php if($product->status == 'Active'): ?>
+                                                    <span class="badge text-bg-success"><?php echo e($product->status); ?></span>
+                                                <?php else: ?>
+                                                    <span class="badge text-bg-secondary"><?php echo e($product->status); ?></span>
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php else: ?>
+                        <div class="text-center py-4">
+                            <p class="text-muted"><?php echo e(__('No products found for this member.')); ?></p>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+        
         <div class="col-sm-12">
             <div class="card table-card">
                 <div class="card-header">

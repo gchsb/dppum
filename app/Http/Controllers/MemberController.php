@@ -23,7 +23,12 @@ class MemberController extends Controller
     public function index()
     {
         if (\Auth::user()->can('manage member')) {
-            $members = Member::where('parent_id', '=', parentId())->orderBy('id', 'desc')->get();
+            if (auth()->user()->hasRole('super admin')) {
+                $members = Member::all();
+            }
+            else{
+                $members = Member::where('parent_id', '=', parentId())->orderBy('id', 'desc')->get();
+            }
         } else {
             return redirect()->back()->with('error', __('Permission Denied.'));
         }
@@ -188,16 +193,31 @@ class MemberController extends Controller
     public function show($id)
     {
         if (\Auth::user()->can('show member')) {
-            $member = Member::with('details')->where('parent_id', parentId())->where('id', Crypt::decrypt($id))->first();
-            $memberships = Membership::where('parent_id', parentId())
-                ->where('member_id', $member->id)
-                ->orderBy('id', 'DESC')
-                ->get();
+            $member = Member::with(['details', 'products'])->where('id', Crypt::decrypt($id));
 
-            $membershipPayments = MembershipPayment::where('parent_id', parentId())
-                ->where('member_id', $member->id)
-                ->orderBy('id', 'DESC')
-                ->get();
+            if (!auth()->user()->hasRole('super admin')) {
+                $member->where('parent_id', parentId());
+            }
+            $member = $member->first();
+
+            $memberships = Membership::where('member_id', $member->id)
+                ->orderBy('id', 'DESC');
+
+            if (!auth()->user()->hasRole('super admin')) {
+                $memberships->where('parent_id', parentId());
+            }
+
+            $memberships = $memberships->get();
+
+
+            $membershipPayments = MembershipPayment::where('member_id', $member->id)
+                ->orderBy('id', 'DESC');
+
+            if (!auth()->user()->hasRole('super admin')) {
+                $membershipPayments->where('parent_id', parentId());
+            }
+
+            $membershipPayments = $membershipPayments->get();
 
             $lastMembership = $memberships->first();
 
@@ -207,7 +227,8 @@ class MemberController extends Controller
             }
 
             $documents = MemberDocument::where('member_id', $member->id)->get();
-            return view('member.show', compact('member', 'documents', 'memberships', 'membershipPayments', 'lastMembership', 'status'));
+            $products = $member->products;
+            return view('member.show', compact('member', 'documents', 'memberships', 'membershipPayments', 'lastMembership', 'status', 'products'));
         } else {
             return redirect()->back()->with('error', __('Permission Denied.'));
         }
@@ -461,13 +482,18 @@ class MemberController extends Controller
     public function register()
     {
         // Get all owners for dropdown
-        $owners = User::where('type', 'owner')
+        $ownersList = User::query()
+            ->where('type', 'owner')
             ->where('is_active', 1)
-            ->orderBy('name', 'asc')
-            ->get();
+            ->whereNotNull('state')
+            ->selectRaw('MIN(id) as id, state')
+            ->groupBy('state')
+            ->orderBy('state')
+            ->pluck('state', 'id');
 
-        $ownersList = $owners->pluck('name', 'id');
-        $ownersList->prepend('Select State Leader', '');
+        $ownersList->prepend('Select State', '');
+
+
 
         return view('member.register', compact('ownersList'));
     }

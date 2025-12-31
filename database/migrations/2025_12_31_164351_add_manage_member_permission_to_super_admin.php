@@ -13,9 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('members', function (Blueprint $table) {
-            $table->boolean('form_submitted')->default(false)->after('parent_id');
-        });
+        \Spatie\Permission\Models\Role::findByName('super admin')->givePermissionTo('show member','manage member');
     }
 
     /**
@@ -25,13 +23,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('members', function (Blueprint $table) {
-            $table->dropColumn('form_submitted');
+        Schema::table('super_admin', function (Blueprint $table) {
+            //
         });
     }
 };
-
-
-
-
-

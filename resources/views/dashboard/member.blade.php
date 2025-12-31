@@ -95,6 +95,40 @@
             </div>
         </div>
 
+        @php
+            $currentMember = \App\Models\Member::where('user_id', Auth::id())->first();
+            $memberDetails = $currentMember ? \App\Models\MemberDetail::where('member_id', $currentMember->id)->first() : null;
+        @endphp
+
+        @if($currentMember && $currentMember->form_submitted && $memberDetails)
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">{{ __('Your Member Details') }}</h5>
+                    <a href="{{ route('member-details.edit') }}" class="btn btn-sm btn-primary">
+                        <i class="ti ti-edit"></i> {{ __('Edit Details') }}
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p class="mb-2"><strong>{{ __('Full Name') }}:</strong> {{ $memberDetails->full_name }}</p>
+                            <p class="mb-2"><strong>{{ __('Business/Company') }}:</strong> {{ $memberDetails->business_company_name }}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="mb-2"><strong>{{ __('Phone/WhatsApp') }}:</strong> {{ $memberDetails->phone_whatsapp }}</p>
+                            <p class="mb-2"><strong>{{ __('Office State') }}:</strong> {{ $memberDetails->office_state }}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="mb-2"><strong>{{ __('SSM Status') }}:</strong> {{ $memberDetails->ssm_status }}</p>
+                            <p class="mb-2"><strong>{{ __('Last Updated') }}:</strong> {{ $memberDetails->updated_at->format('d M Y') }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
+
 
 
         <div class="col-sm-12 mb-5">

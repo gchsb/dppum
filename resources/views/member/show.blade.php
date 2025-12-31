@@ -367,6 +367,63 @@
                 </div>
             </div>
         @endif
+        
+        <div class="col-sm-12">
+            <div class="card table-card">
+                <div class="card-header">
+                    <div class="row align-items-center g-2">
+                        <div class="col">
+                            <h5>
+                                {{ __('Products') }}
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body pt-0">
+                    @if($products && $products->count() > 0)
+                        <div class="dt-responsive table-responsive">
+                            <table class="table table-hover advance-datatable">
+                                <thead>
+                                    <tr>
+                                        <th>{{ __('Product Name') }}</th>
+                                        <th>{{ __('Description') }}</th>
+                                        <th>{{ __('Category') }}</th>
+                                        <th>{{ __('Price') }}</th>
+                                        <th>{{ __('Quantity') }}</th>
+                                        <th>{{ __('SKU') }}</th>
+                                        <th>{{ __('Status') }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($products as $product)
+                                        <tr>
+                                            <td>{{ $product->product_name }}</td>
+                                            <td>{{ $product->description ?? '-' }}</td>
+                                            <td>{{ $product->category ?? '-' }}</td>
+                                            <td>{{ priceFormat($product->price) }}</td>
+                                            <td>{{ $product->quantity }}</td>
+                                            <td>{{ $product->sku ?? '-' }}</td>
+                                            <td>
+                                                @if ($product->status == 'Active')
+                                                    <span class="badge text-bg-success">{{ $product->status }}</span>
+                                                @else
+                                                    <span class="badge text-bg-secondary">{{ $product->status }}</span>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    @else
+                        <div class="text-center py-4">
+                            <p class="text-muted">{{ __('No products found for this member.') }}</p>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+        
         <div class="col-sm-12">
             <div class="card table-card">
                 <div class="card-header">

@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -57,11 +58,17 @@ class UserController extends Controller
                     return redirect()->back()->with('error', $messages->first());
                 }
 
+               $userForState= User::where('state',Str::lower($request->state))->first();
+                if ($userForState) {
+                    return redirect()->back()->with('error', __('User With '.$request->state.' State already exists.'));
+                }
+
                 $user = new User();
                 $user->name = $request->name;
                 $user->email = $request->email;
                 $user->password = \Hash::make($request->password);
                 $user->phone_number = $request->phone_number;
+                $user->state = $request->state;
                 $user->type = 'owner';
                 $user->profile = 'avatar.png';
                 $user->lang = 'english';

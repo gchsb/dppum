@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('members', function (Blueprint $table) {
-            $table->boolean('form_submitted')->default(false)->after('parent_id');
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('state')->nullable();
         });
     }
 
@@ -25,13 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('members', function (Blueprint $table) {
-            $table->dropColumn('form_submitted');
+        Schema::table('users', function (Blueprint $table) {
+            //
         });
     }
 };
-
-
-
-
-
