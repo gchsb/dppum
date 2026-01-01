@@ -59,7 +59,7 @@
                                     <th>{{ __('Membership') }}</th>
                                     <th>{{ __('Expiry Date') }}</th>
                                     <th>{{ __('Gender') }}</th>
-                                    @if (Gate::check('edit member') || Gate::check('delete member'))
+                                    @if (Gate::check('edit member') || Gate::check('delete member') ||  Gate::check('show member'))
                                         <th>{{ __('Action') }}</th>
                                     @endif
                                 </tr>
