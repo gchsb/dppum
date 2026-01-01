@@ -1,16 +1,16 @@
-@extends('layouts.app')
-@php
+<?php
     $profile = asset(Storage::url('upload/profile/'));
-@endphp
-@section('page-title')
-    {{ __('Customer Details') }}
-@endsection
-@section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('users.index') }}">{{ __('Customer') }}</a></li>
-    <li class="breadcrumb-item" aria-current="page"> {{ __('Show') }}</li>
-@endsection
-@push('script-page')
+?>
+<?php $__env->startSection('page-title'); ?>
+    <?php echo e(__('Customer Details')); ?>
+
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('breadcrumb'); ?>
+    <li class="breadcrumb-item"><a href="<?php echo e(route('dashboard')); ?>"><?php echo e(__('Dashboard')); ?></a></li>
+    <li class="breadcrumb-item"><a href="<?php echo e(route('users.index')); ?>"><?php echo e(__('Customer')); ?></a></li>
+    <li class="breadcrumb-item" aria-current="page"> <?php echo e(__('Show')); ?></li>
+<?php $__env->stopSection(); ?>
+<?php $__env->startPush('script-page'); ?>
     <script>
         $(document).on('change', '.plan_change', function () {
             $('.plan_change_info').hide();
@@ -20,8 +20,8 @@
 
         });
     </script>
-@endpush
-@section('content')
+<?php $__env->stopPush(); ?>
+<?php $__env->startSection('content'); ?>
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
@@ -31,14 +31,16 @@
                             <a class="nav-link active" id="profile-tab-1" data-bs-toggle="tab" href="#profile-1"
                                role="tab" aria-selected="true">
                                 <i class="material-icons-two-tone">request_quote</i>
-                                {{ __('Transactions History') }}
+                                <?php echo e(__('Transactions History')); ?>
+
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="profile-tab-2" data-bs-toggle="tab" href="#profile-2" role="tab"
                                aria-selected="true">
                                 <i class="material-icons-two-tone me-2">description</i>
-                                {{ __('Packages') }}
+                                <?php echo e(__('Packages')); ?>
+
                             </a>
                         </li>
                     </ul>
@@ -54,16 +56,16 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="flex-shrink-0">
                                                     <img class="img-radius img-fluid wid-40"
-                                                         src="{{ !empty($user->profile) ? $profile . '/' . $user->profile : $profile . '/avatar.png' }}"
+                                                         src="<?php echo e(!empty($user->profile) ? $profile . '/' . $user->profile : $profile . '/avatar.png'); ?>"
                                                          alt="User image"/>
                                                 </div>
                                                 <div class="flex-grow-1 mx-3">
-                                                    <h5 class="mb-1">{{ $user->name }}</h5>
-                                                    <h6 class="text-muted mb-0">{!! $user->SubscriptionLeftDay() !!}</h6>
+                                                    <h5 class="mb-1"><?php echo e($user->name); ?></h5>
+                                                    <h6 class="text-muted mb-0"><?php echo $user->SubscriptionLeftDay(); ?></h6>
                                                 </div>
                                                 <div class="flex-shrink-0">
                                                     <div class="badge bg-primary rounded-pill text-base">
-                                                        {{ $user->type }}</div>
+                                                        <?php echo e($user->type); ?></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -75,10 +77,10 @@
                                                             <i class="material-icons-two-tone f-20">email</i>
                                                         </div>
                                                         <div class="flex-grow-1 mx-3">
-                                                            <h5 class="m-0">{{ __('Email') }}</h5>
+                                                            <h5 class="m-0"><?php echo e(__('Email')); ?></h5>
                                                         </div>
                                                         <div class="flex-shrink-0">
-                                                            <small>{{ $user->email }}</small>
+                                                            <small><?php echo e($user->email); ?></small>
                                                         </div>
                                                     </div>
                                                 </a>
@@ -88,10 +90,10 @@
                                                             <i class="material-icons-two-tone f-20 " >home</i>
                                                         </div>
                                                         <div class="flex-grow-1 mx-3">
-                                                            <h5 class="m-0">{{ __('State') }}</h5>
+                                                            <h5 class="m-0"><?php echo e(__('State')); ?></h5>
                                                         </div>
                                                         <div class="flex-shrink-0">
-                                                            <small class="text-uppercase">{{ $user->state }}</small>
+                                                            <small class="text-uppercase"><?php echo e($user->state); ?></small>
                                                         </div>
                                                     </div>
                                                 </a>
@@ -101,10 +103,10 @@
                                                             <i class="material-icons-two-tone f-20">phonelink_ring</i>
                                                         </div>
                                                         <div class="flex-grow-1 mx-3">
-                                                            <h5 class="m-0">{{ __('Phone') }}</h5>
+                                                            <h5 class="m-0"><?php echo e(__('Phone')); ?></h5>
                                                         </div>
                                                         <div class="flex-shrink-0">
-                                                            <small>{{ $user->phone_number }}</small>
+                                                            <small><?php echo e($user->phone_number); ?></small>
                                                         </div>
                                                     </div>
                                                 </a>
@@ -114,10 +116,10 @@
                                                             <i class="material-icons-two-tone f-20">pin_drop</i>
                                                         </div>
                                                         <div class="flex-grow-1 mx-3">
-                                                            <h5 class="m-0">{{ __('Package') }}</h5>
+                                                            <h5 class="m-0"><?php echo e(__('Package')); ?></h5>
                                                         </div>
                                                         <div class="flex-shrink-0">
-                                                            <small>{{ !empty($user->subscriptions) ? $user->subscriptions->title : '' }}</small>
+                                                            <small><?php echo e(!empty($user->subscriptions) ? $user->subscriptions->title : ''); ?></small>
                                                         </div>
                                                     </div>
                                                 </a>
@@ -128,48 +130,51 @@
                                 <div class="col-lg-8 col-xxl-9">
                                     <div class="card border">
                                         <div class="card-header">
-                                            <h5>{{ __('Transactions History') }}</h5>
+                                            <h5><?php echo e(__('Transactions History')); ?></h5>
                                         </div>
                                         <div class="card-body">
                                             <div class="dt-responsive table-responsive">
                                                 <table class="table table-hover advance-datatable">
                                                     <thead>
                                                     <tr>
-                                                        <th>{{ __('User') }}</th>
-                                                        <th>{{ __('Date') }}</th>
-                                                        <th>{{ __('Subscription') }}</th>
-                                                        <th>{{ __('Amount') }}</th>
-                                                        <th>{{ __('Payment Type') }}</th>
-                                                        <th>{{ __('Payment Status') }}</th>
+                                                        <th><?php echo e(__('User')); ?></th>
+                                                        <th><?php echo e(__('Date')); ?></th>
+                                                        <th><?php echo e(__('Subscription')); ?></th>
+                                                        <th><?php echo e(__('Amount')); ?></th>
+                                                        <th><?php echo e(__('Payment Type')); ?></th>
+                                                        <th><?php echo e(__('Payment Status')); ?></th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    @foreach ($transactions as $transaction)
+                                                    <?php $__currentLoopData = $transactions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $transaction): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <tr>
-                                                            <td>{{ !empty($transaction->users) ? $transaction->users->name : '' }}
+                                                            <td><?php echo e(!empty($transaction->users) ? $transaction->users->name : ''); ?>
+
                                                             </td>
-                                                            <td>{{ dateFormat($transaction->created_at) }}</td>
-                                                            <td>{{ !empty($transaction->subscriptions) ? $transaction->subscriptions->title : '-' }}
+                                                            <td><?php echo e(dateFormat($transaction->created_at)); ?></td>
+                                                            <td><?php echo e(!empty($transaction->subscriptions) ? $transaction->subscriptions->title : '-'); ?>
+
                                                             </td>
-                                                            <td>{{ $settings['CURRENCY_SYMBOL'] . $transaction->amount }}
+                                                            <td><?php echo e($settings['CURRENCY_SYMBOL'] . $transaction->amount); ?>
+
                                                             </td>
-                                                            <td>{{ $transaction->payment_type }}</td>
+                                                            <td><?php echo e($transaction->payment_type); ?></td>
                                                             <td>
-                                                                @if ($transaction->payment_status == 'Pending')
+                                                                <?php if($transaction->payment_status == 'Pending'): ?>
                                                                     <span
-                                                                        class="d-inline badge text-bg-warning">{{ $transaction->payment_status }}</span>
-                                                                @elseif($transaction->payment_status=='succeeded' || $transaction->payment_status=='Success')
+                                                                        class="d-inline badge text-bg-warning"><?php echo e($transaction->payment_status); ?></span>
+                                                                <?php elseif($transaction->payment_status=='succeeded' || $transaction->payment_status=='Success'): ?>
                                                                     <span
-                                                                        class="d-inline badge text-bg-success">{{ $transaction->payment_status }}</span>
-                                                                @else
+                                                                        class="d-inline badge text-bg-success"><?php echo e($transaction->payment_status); ?></span>
+                                                                <?php else: ?>
                                                                     <span
-                                                                        class="d-inline badge text-bg-danger">{{ $transaction->payment_status }}</span>
-                                                                @endif
+                                                                        class="d-inline badge text-bg-danger"><?php echo e($transaction->payment_status); ?></span>
+                                                                <?php endif; ?>
 
 
                                                             </td>
                                                         </tr>
-                                                    @endforeach
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -186,16 +191,16 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="flex-shrink-0">
                                                     <img class="img-radius img-fluid wid-40"
-                                                         src="{{ !empty($user->profile) ? $profile . '/' . $user->profile : $profile . '/avatar.png' }}"
+                                                         src="<?php echo e(!empty($user->profile) ? $profile . '/' . $user->profile : $profile . '/avatar.png'); ?>"
                                                          alt="User image"/>
                                                 </div>
                                                 <div class="flex-grow-1 mx-3">
-                                                    <h5 class="mb-1">{{ $user->name }}</h5>
-                                                    <h6 class="text-muted mb-0">{!! $user->SubscriptionLeftDay() !!}</h6>
+                                                    <h5 class="mb-1"><?php echo e($user->name); ?></h5>
+                                                    <h6 class="text-muted mb-0"><?php echo $user->SubscriptionLeftDay(); ?></h6>
                                                 </div>
                                                 <div class="flex-shrink-0">
                                                     <div class="badge bg-primary rounded-pill text-base">
-                                                        {{ $user->type }}</div>
+                                                        <?php echo e($user->type); ?></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -207,10 +212,10 @@
                                                             <i class="material-icons-two-tone f-20">email</i>
                                                         </div>
                                                         <div class="flex-grow-1 mx-3">
-                                                            <h5 class="m-0">{{ __('Email') }}</h5>
+                                                            <h5 class="m-0"><?php echo e(__('Email')); ?></h5>
                                                         </div>
                                                         <div class="flex-shrink-0">
-                                                            <small>{{ $user->email }}</small>
+                                                            <small><?php echo e($user->email); ?></small>
                                                         </div>
                                                     </div>
                                                 </a>
@@ -220,10 +225,10 @@
                                                             <i class="material-icons-two-tone f-20">phonelink_ring</i>
                                                         </div>
                                                         <div class="flex-grow-1 mx-3">
-                                                            <h5 class="m-0">{{ __('Phone') }}</h5>
+                                                            <h5 class="m-0"><?php echo e(__('Phone')); ?></h5>
                                                         </div>
                                                         <div class="flex-shrink-0">
-                                                            <small>{{ $user->phone_number }}</small>
+                                                            <small><?php echo e($user->phone_number); ?></small>
                                                         </div>
                                                     </div>
                                                 </a>
@@ -233,10 +238,10 @@
                                                             <i class="material-icons-two-tone f-20">pin_drop</i>
                                                         </div>
                                                         <div class="flex-grow-1 mx-3">
-                                                            <h5 class="m-0">{{ __('Package') }}</h5>
+                                                            <h5 class="m-0"><?php echo e(__('Package')); ?></h5>
                                                         </div>
                                                         <div class="flex-shrink-0">
-                                                            <small>{{ !empty($user->subscriptions) ? $user->subscriptions->title : '' }}</small>
+                                                            <small><?php echo e(!empty($user->subscriptions) ? $user->subscriptions->title : ''); ?></small>
                                                         </div>
                                                     </div>
                                                 </a>
@@ -251,71 +256,77 @@
                                                 <div class="col-sm-5">
                                                     <img src="../assets/images/admin/img-bulb.svg" alt="images"
                                                          class="img-fluid"/>
-                                                    @foreach ($subscriptions as $subscription_key => $subscription)
-                                                        {{-- <ul class="d-flex flex-column gap-2 mt-3"> --}}
-                                                        <ul class="gap-2 mt-3 plan_change_info customCheckdef{{ $subscription_key }}"
-                                                            style="display:{{ $subscription->id == $user->subscription ? 'block' : 'none' }}">
-                                                            <li>{{ __('User Limit') }} {{ $subscription->user_limit }}
+                                                    <?php $__currentLoopData = $subscriptions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subscription_key => $subscription): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        
+                                                        <ul class="gap-2 mt-3 plan_change_info customCheckdef<?php echo e($subscription_key); ?>"
+                                                            style="display:<?php echo e($subscription->id == $user->subscription ? 'block' : 'none'); ?>">
+                                                            <li><?php echo e(__('User Limit')); ?> <?php echo e($subscription->user_limit); ?>
+
                                                             </li>
-                                                            <li>{{ __('Member Limit') }} {{ $subscription->member_limit }}
+                                                            <li><?php echo e(__('Member Limit')); ?> <?php echo e($subscription->member_limit); ?>
+
                                                             </li>
-                                                            <li>{{ __('Membership Plan Limit') }} {{ $subscription->membership_plan_limit }}
+                                                            <li><?php echo e(__('Membership Plan Limit')); ?> <?php echo e($subscription->membership_plan_limit); ?>
+
                                                             </li>
-                                                            @if ($subscription->enabled_logged_history)
-                                                                <li>{{ __('Enabled') }} {{ __('Logged History') }}</li>
-                                                            @else
-                                                                <li>{{ __('Disable') }} {{ __('Logged History') }}</li>
-                                                            @endif
+                                                            <?php if($subscription->enabled_logged_history): ?>
+                                                                <li><?php echo e(__('Enabled')); ?> <?php echo e(__('Logged History')); ?></li>
+                                                            <?php else: ?>
+                                                                <li><?php echo e(__('Disable')); ?> <?php echo e(__('Logged History')); ?></li>
+                                                            <?php endif; ?>
                                                         </ul>
-                                                    @endforeach
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 </div>
                                                 <div class="col-sm-7">
                                                     <div class="course-price">
-                                                        @foreach ($subscriptions as $sitem_key => $item)
+                                                        <?php $__currentLoopData = $subscriptions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sitem_key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                             <div class="form-check p-0">
                                                                 <input type="radio" name="radio1"
                                                                        class="form-check-input input-primary plan_change"
-                                                                       {{ $item->id == $user->subscription ? 'checked' : '' }}
-                                                                       id="customCheckdef{{ $sitem_key }}"/>
+                                                                       <?php echo e($item->id == $user->subscription ? 'checked' : ''); ?>
+
+                                                                       id="customCheckdef<?php echo e($sitem_key); ?>"/>
                                                                 <label class="form-check-label d-block"
-                                                                       for="customCheckdef{{ $sitem_key }}">
+                                                                       for="customCheckdef<?php echo e($sitem_key); ?>">
                                                                     <span class="d-flex align-items-center">
                                                                         <span class="flex-grow-1 me-3">
                                                                             <span
-                                                                                class="h5 d-block">{{ $item->title }}</span>
-                                                                            @if ($item->id == $user->subscription)
+                                                                                class="h5 d-block"><?php echo e($item->title); ?></span>
+                                                                            <?php if($item->id == $user->subscription): ?>
                                                                                 <span
-                                                                                    class="badge">{{ $item->id == $user->subscription ? __('Active') : __('Click to Select') }}</span>
-                                                                            @else
-                                                                                {!! Form::open([
+                                                                                    class="badge"><?php echo e($item->id == $user->subscription ? __('Active') : __('Click to Select')); ?></span>
+                                                                            <?php else: ?>
+                                                                                <?php echo Form::open([
                                                                                     'method' => 'POST',
                                                                                     'route' => [
                                                                                         'subscription.manual_assign_package',
                                                                                         [\Illuminate\Support\Facades\Crypt::encrypt($item->id), $user->id],
                                                                                     ],
-                                                                                ]) !!}
+                                                                                ]); ?>
+
                                                                                 <a class="avtar avtar-xs btn-link-danger text-danger confirm_dialog"
-                                                                                   data-dialog-title="{{ __('Are you sure want to Change Package?') }}"
-                                                                                   data-dialog-text="{{ __('This record can not be restore after change. Do you want to confirm?') }}"
+                                                                                   data-dialog-title="<?php echo e(__('Are you sure want to Change Package?')); ?>"
+                                                                                   data-dialog-text="<?php echo e(__('This record can not be restore after change. Do you want to confirm?')); ?>"
                                                                                    data-bs-toggle="tooltip"
-                                                                                   data-bs-original-title="{{ __('Select') }}"
+                                                                                   data-bs-original-title="<?php echo e(__('Select')); ?>"
                                                                                    href="#"> <span
-                                                                                        class="badge">{{ $item->id == $user->subscription ? __('Active') : __('Click to Select') }}</span>
+                                                                                        class="badge"><?php echo e($item->id == $user->subscription ? __('Active') : __('Click to Select')); ?></span>
                                                                                 </a>
-                                                                                {!! Form::close() !!}
-                                                                            @endif
+                                                                                <?php echo Form::close(); ?>
+
+                                                                            <?php endif; ?>
                                                                         </span>
                                                                         <span class="flex-shrink-0">
                                                                             <span class="h3 mb-0">
-                                                                                {{ $item->package_amount }}{{ subscriptionPaymentSettings()['CURRENCY_SYMBOL'] }}/
+                                                                                <?php echo e($item->package_amount); ?><?php echo e(subscriptionPaymentSettings()['CURRENCY_SYMBOL']); ?>/
                                                                                 <span
-                                                                                    class="text-sm">{{ $item->interval }}</span>
+                                                                                    class="text-sm"><?php echo e($item->interval); ?></span>
                                                                             </span>
                                                                         </span>
                                                                     </span>
                                                                 </label>
                                                             </div>
-                                                        @endforeach
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -329,4 +340,6 @@
             </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\wamp-new\www\dppum\resources\views/user/show.blade.php ENDPATH**/ ?>

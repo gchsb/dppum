@@ -64,7 +64,7 @@
                                     <th><?php echo e(__('Membership')); ?></th>
                                     <th><?php echo e(__('Expiry Date')); ?></th>
                                     <th><?php echo e(__('Gender')); ?></th>
-                                    <?php if(Gate::check('edit member') || Gate::check('delete member')): ?>
+                                    <?php if(Gate::check('edit member') || Gate::check('delete member') ||  Gate::check('show member')): ?>
                                         <th><?php echo e(__('Action')); ?></th>
                                     <?php endif; ?>
                                 </tr>
@@ -102,7 +102,7 @@
 
                                         </td>
                                         <td><?php echo e($member->gender); ?> </td>
-                                        <?php if(Gate::check('edit member') || Gate::check('delete member')): ?>
+                                        <?php if(Gate::check('edit member') || Gate::check('delete member') || Gate::check('show member') ): ?>
                                             <td>
                                                 <div class="cart-action">
                                                     <?php echo Form::open(['method' => 'DELETE', 'route' => ['member.destroy', $member->id]]); ?>
