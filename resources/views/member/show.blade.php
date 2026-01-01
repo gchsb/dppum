@@ -92,6 +92,8 @@
                                                     <td>:</td>
                                                     <td>{{ dateFormat($member->dob) }} </td>
                                                 </tr>
+
+
                                                 <tr>
                                                     <td><b class="text-header">{{ __('Gender') }}</b></td>
                                                     <td>:</td>
@@ -367,7 +369,7 @@
                 </div>
             </div>
         @endif
-        
+
         <div class="col-sm-12">
             <div class="card table-card">
                 <div class="card-header">
@@ -423,7 +425,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="col-sm-12">
             <div class="card table-card">
                 <div class="card-header">
