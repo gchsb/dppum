@@ -83,9 +83,7 @@
                                                 </a>
                                                 <a href="#" class="list-group-item list-group-item-action">
                                                     <div class="d-flex align-items-center">
-                                                        <div class="flex-shrink-0">
-                                                            <i class="material-icons-two-tone f-20">address</i>
-                                                        </div>
+
                                                         <div class="flex-grow-1 mx-3">
                                                             <h5 class="m-0">{{ __('State') }}</h5>
                                                         </div>
