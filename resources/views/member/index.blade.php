@@ -94,7 +94,7 @@
                                         <td>{{ !empty($member->membershipLates) ? dateFormat($member->membershipLates->expiry_date) : '-' }}
                                         </td>
                                         <td>{{ $member->gender }} </td>
-                                        @if (Gate::check('edit member') || Gate::check('delete member'))
+                                        @if (Gate::check('edit member') || Gate::check('delete member') ||Gate::check('show member') )
                                             <td>
                                                 <div class="cart-action">
                                                     {!! Form::open(['method' => 'DELETE', 'route' => ['member.destroy', $member->id]]) !!}
